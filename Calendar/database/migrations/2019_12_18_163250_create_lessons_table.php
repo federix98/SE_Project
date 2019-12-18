@@ -15,6 +15,14 @@ class CreateLessonsTable extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigIncrements('classroom_id');
+            $table->bigIncrements('teaching_id');
+            $table->time('start_time', 0);
+            $table->tinyInteger('duration');
+            $table->tinyInteger('week_day');
+            $table->date('start_date');
+            $table->date('end_date');
+
             $table->timestamps();
         });
     }

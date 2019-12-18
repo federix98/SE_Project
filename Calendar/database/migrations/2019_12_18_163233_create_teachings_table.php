@@ -15,6 +15,12 @@ class CreateTeachingsTable extends Migration
     {
         Schema::create('teachings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name', 100);
+            $table->string('code', 32);
+            $table->tinyInteger('CFU');
+            $table->tinyInteger('semester');
+            $table->string('lenguage', 32);
+
             $table->timestamps();
         });
     }

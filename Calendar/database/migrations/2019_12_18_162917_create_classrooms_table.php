@@ -15,6 +15,13 @@ class CreateClassroomsTable extends Migration
     {
         Schema::create('classrooms', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name', 45);
+            $table->bigIncrements('building_id');
+            $table->tinyInteger('floor');
+            $table->text('directions');
+            $table->integer('capacity');
+            $table->boolean('accessibility');
+
             $table->timestamps();
         });
     }
