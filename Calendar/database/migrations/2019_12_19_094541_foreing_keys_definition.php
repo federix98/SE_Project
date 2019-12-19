@@ -99,7 +99,11 @@ class ForeingKeysDefinition extends Migration
 
         Schema::table('degree_special_event', function(Blueprint $table21) {
             $table21->foreign('special_event_id')->references('id')
-            ->on('special_events')->onDelete('set null'); }); 
+            ->on('special_events')->onDelete('set null'); });
+            
+        Schema::table('special_events', function(Blueprint $table22) {
+            $table22->foreign('classroom_id')->references('id')
+            ->on('classrooms')->onDelete('set null'); });
     }
 
     /**
@@ -130,6 +134,7 @@ class ForeingKeysDefinition extends Migration
         $table18->dropForeign(['professor_id']);
         $table19->dropForeign(['teaching_id']);
         $table20->dropForeign(['degree_id']);
-        $table21->dropForeign(['special_event_id']);  
+        $table21->dropForeign(['special_event_id']);
+        $table22->dropForeign(['classroom_id']); 
     }
 }

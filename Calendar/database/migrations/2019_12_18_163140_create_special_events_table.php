@@ -15,6 +15,7 @@ class CreateSpecialEventsTable extends Migration
     {
         Schema::create('special_events', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('classroom_id')->nullable();
             $table->string('name', 200);
             $table->date('date_event');
             $table->time('start_time', 0);
