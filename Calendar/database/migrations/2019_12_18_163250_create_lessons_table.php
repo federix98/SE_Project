@@ -15,8 +15,8 @@ class CreateLessonsTable extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('classroom_id')->nullable();
-            $table->bigInteger('teaching_id')->nullable();
+            $table->unsignedBigInteger('classroom_id')->nullable();
+            $table->unsignedBigInteger('teaching_id')->nullable();
             $table->time('start_time', 0);
             $table->tinyInteger('duration');
             $table->tinyInteger('week_day');

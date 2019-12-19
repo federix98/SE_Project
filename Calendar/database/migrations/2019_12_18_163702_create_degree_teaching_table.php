@@ -15,9 +15,9 @@ class CreateDegreeTeachingTable extends Migration
     {
         Schema::create('degree_teaching', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('degree_id')->nullable();
-            $table->bigInteger('teaching_id')->nullable();
-            $table->bigInteger('teaching_type_id')->nullable();
+            $table->unsignedBigInteger('degree_id')->nullable();
+            $table->unsignedBigInteger('teaching_id')->nullable();
+            $table->unsignedBigInteger('teaching_type_id')->nullable();
 
             $table->timestamps();
         });

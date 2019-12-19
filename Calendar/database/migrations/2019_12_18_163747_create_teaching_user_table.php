@@ -15,8 +15,8 @@ class CreateTeachingUserTable extends Migration
     {
         Schema::create('teaching_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->nullable();
-            $table->bigInteger('teaching_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('teaching_id')->nullable();
 
             $table->timestamps();
         });

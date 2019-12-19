@@ -15,8 +15,8 @@ class CreateProfessorsTable extends Migration
     {
         Schema::create('professors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('professor_role_id')->nullable();
-            $table->bigInteger('department_id')->nullable();
+            $table->unsignedBigInteger('professor_role_id')->nullable();
+            $table->unsignedBigInteger('department_id')->nullable();
             $table->string('name', 45);
             $table->string('surname', 45);            
             $table->string('office_address', 100);
