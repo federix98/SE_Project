@@ -15,6 +15,9 @@ class CreateCanceledLessonsTable extends Migration
     {
         Schema::create('canceled_lessons', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigIncrements('lesson_id')->nullable();
+            $table->date('date_lesson');
+
             $table->timestamps();
         });
     }

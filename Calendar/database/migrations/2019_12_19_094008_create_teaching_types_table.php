@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDegreeGroupsTable extends Migration
+class CreateTeachingTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateDegreeGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('degree_groups', function (Blueprint $table) {
+        Schema::create('teaching_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('department_id')->nullable();
-            $table->string('name', 45);
+            $table->string('type_name', 45);
 
             $table->timestamps();
         });
@@ -29,6 +28,6 @@ class CreateDegreeGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('degree_groups');
+        Schema::dropIfExists('teaching_types');
     }
 }

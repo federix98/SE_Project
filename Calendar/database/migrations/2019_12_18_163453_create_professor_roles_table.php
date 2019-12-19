@@ -15,6 +15,8 @@ class CreateProfessorRolesTable extends Migration
     {
         Schema::create('professor_roles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name', 45);
+            
             $table->timestamps();
         });
     }
