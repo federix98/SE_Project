@@ -15,7 +15,7 @@ class CreateUpdatesTable extends Migration
     {
         Schema::create('updates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('teaching_id')->nullable();
+            $table->bigInteger('teaching_id')->nullable();
             $table->string('title', 200);
             $table->text('info');
             $table->string('link', 2084);

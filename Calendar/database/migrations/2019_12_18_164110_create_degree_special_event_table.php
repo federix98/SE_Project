@@ -15,8 +15,8 @@ class CreateDegreeSpecialEventTable extends Migration
     {
         Schema::create('degree_special_event', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('degree_id');
-            $table->bigIncrements('special_event_id')->nullable();
+            $table->bigInteger('degree_id');
+            $table->bigInteger('special_event_id')->nullable();
 
             $table->timestamps();
         });

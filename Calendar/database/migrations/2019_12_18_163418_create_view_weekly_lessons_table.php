@@ -15,9 +15,9 @@ class CreateViewWeeklyLessonsTable extends Migration
     {
         Schema::create('view_weekly_lessons', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('teaching_id');
-            $table->bigIncrements('classroom_id');
-            $table->bigIncrements('professor_id');
+            $table->bigInteger('teaching_id');
+            $table->bigInteger('classroom_id');
+            $table->bigInteger('professor_id');
             $table->tinyInteger('week_day');
             $table->boolean('canceled');
             $table->time('start_time', 0);
