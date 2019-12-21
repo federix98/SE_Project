@@ -104,8 +104,6 @@ class ForeingKeysDefinition extends Migration
         Schema::table('special_events', function(Blueprint $table22) {
             $table22->foreign('classroom_id')->references('id')
             ->on('classrooms')->onDelete('set null'); });
-
-        Artisan::call('db:seed');
     }
 
     /**

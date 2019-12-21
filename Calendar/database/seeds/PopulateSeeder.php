@@ -11,6 +11,6 @@ class PopulateSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\building', 10)->create();
+        factory('App\Building', 10)->create();
     }
 }

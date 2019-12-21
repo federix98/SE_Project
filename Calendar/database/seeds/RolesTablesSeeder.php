@@ -82,5 +82,15 @@ class RolesTablesSeeder extends Seeder
             DB::table('degree_groups')->insert($item);
         }
 
+        $teaching_types = [            
+            ['id' => 1, 'type_name' => 'Obbligatorio'],
+            ['id' => 2, 'type_name' => 'Opzionale'],
+            ['id' => 3, 'type_name' => 'A scelta'],
+        ];
+    
+        foreach ($teaching_types as $item) {
+            DB::table('teaching_types')->insert($item);
+        }
+
     }
 }
