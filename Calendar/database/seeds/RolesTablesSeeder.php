@@ -55,5 +55,32 @@ class RolesTablesSeeder extends Seeder
         foreach ($Departments as $item) {
             DB::table('departments')->insert($item);
         }
+
+        $Degree_groups = [            
+            ['id' => 1, 'name' => 'Informatica', 'department_id' => '1'],
+            ['id' => 2, 'name' => 'Ingegneria dell\'informazione', 'department_id' => '1'],
+            ['id' => 3, 'name' => 'Magistrali informatica', 'department_id' => '1'],
+            ['id' => 4, 'name' => 'Biotecnologie', 'department_id' => '2'],
+            ['id' => 5, 'name' => 'Fisioterapia', 'department_id' => '2'],
+            ['id' => 6, 'name' => 'Scienze motorie e sportive', 'department_id' => '2'],
+            ['id' => 7, 'name' => 'Medicina', 'department_id' => '3'],
+            ['id' => 8, 'name' => 'Infermeriestica', 'department_id' => '3'],
+            ['id' => 9, 'name' => 'Ostetricia', 'department_id' => '3'],
+            ['id' => 10, 'name' => 'Lettere', 'department_id' => '4'],
+            ['id' => 11, 'name' => 'Filosofia', 'department_id' => '4'],
+            ['id' => 12, 'name' => 'Beni Culturali', 'department_id' => '4'],
+            ['id' => 13, 'name' => 'Fisica', 'department_id' => '5'],
+            ['id' => 14, 'name' => 'Chimica', 'department_id' => '5'],
+            ['id' => 15, 'name' => 'Magistrale Fisica', 'department_id' => '5'],
+            ['id' => 16, 'name' => 'Ingegneria industriale', 'department_id' => '6'],
+            ['id' => 17, 'name' => 'Economia', 'department_id' => '6'],
+            ['id' => 18, 'name' => 'Ingegneria civile e ambientale', 'department_id' => '7'],
+            ['id' => 19, 'name' => 'Ingegneria edile e architettura', 'department_id' => '7'],
+        ];
+    
+        foreach ($Degree_groups as $item) {
+            DB::table('degree_groups')->insert($item);
+        }
+
     }
 }

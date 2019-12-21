@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class degree_special_event extends Pivot
 {
-    //
+    protected $guarded = [];
 }

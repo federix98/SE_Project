@@ -18,8 +18,14 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'user_role_id' => 1,
+        'degree_id' => numberBetween($min = 1, $max = 15),
+        'name' => $faker->firstName,
+        'surname' => $faker->lastName,
+        'matric_no' => bothify('######'),
         'email' => $faker->unique()->safeEmail,
+        'personal_calendar' => 0,
+        'LAU' => now(),
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
