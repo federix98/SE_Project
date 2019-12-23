@@ -14,7 +14,7 @@ class DegreeController extends Controller
      */
     public function index()
     {
-        //
+        return degree::all();
     }
 
     /**
@@ -36,6 +36,9 @@ class DegreeController extends Controller
     public function store(Request $request)
     {
         //
+        $degree = degree::create($request->all());
+
+        return response()->json($degree, 201);
     }
 
     /**
@@ -46,7 +49,7 @@ class DegreeController extends Controller
      */
     public function show(degree $degree)
     {
-        //
+        return $degree;
     }
 
     /**
@@ -69,7 +72,9 @@ class DegreeController extends Controller
      */
     public function update(Request $request, degree $degree)
     {
-        //
+        $degree = degree::update($request->all());
+
+        return response()->json($degree, 200);
     }
 
     /**
@@ -80,6 +85,8 @@ class DegreeController extends Controller
      */
     public function destroy(degree $degree)
     {
-        //
+        $degree->delete();
+
+        return response()->json(null, 204);
     }
 }

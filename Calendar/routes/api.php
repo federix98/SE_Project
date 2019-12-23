@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('degrees', 'DegreeController@index');
+Route::get('degrees/{degree}', 'DegreeController@show');
+Route::post('degrees', 'DegreeController@store');
+Route::put('degrees/{id}', 'DegreeController@update');
+Route::delete('degrees/{id}', 'DegreeController@destroy');
