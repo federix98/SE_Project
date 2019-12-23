@@ -17,7 +17,7 @@ class CreateExtraLessonsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('classroom_id')->nullable();
             $table->unsignedBigInteger('teaching_id')->nullable();
-            $table->time('start_time', 0);
+            $table->tinyInteger('start_time');
             $table->tinyInteger('duration');
             $table->date('date_lesson');
             

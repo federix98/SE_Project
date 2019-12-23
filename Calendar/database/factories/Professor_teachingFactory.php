@@ -6,8 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Professor_teaching::class, function (Faker $faker) {
     return [
-        'id' => $faker->randomNumber(),
-        'professor_id' => $faker->randomNumber(),
-        'teaching_id' => $faker->randomNumber(),
+        'professor_id' => $faker->numberBetween($min = 1, $max = 1000),
+        'teaching_id' => $faker->numberBetween($min = 1, $max = 8000),
     ];
 });

@@ -18,7 +18,7 @@ class CreateSpecialEventsTable extends Migration
             $table->unsignedBigInteger('classroom_id')->nullable();
             $table->string('name', 200);
             $table->date('date_event');
-            $table->time('start_time', 0);
+            $table->tinyInteger('start_time');
             $table->tinyInteger('duration');
             $table->text('info');
 

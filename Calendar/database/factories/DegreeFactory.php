@@ -6,9 +6,9 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Degree::class, function (Faker $faker) {
     return [
-        'degree_group_id' => $faker->randomNumber(),
-        'name' => $faker->name,
-        'year' => $faker->boolean,
-        'SSD' => $faker->word,
+        'degree_group_id' => $faker->numberBetween($min = 1, $max = 19),
+        'name' => $faker->catchPhrase,
+        'year' => $faker->numberBetween($min = 1, $max = 6),
+        'SSD' => $faker->asciify('****'),
     ];
 });

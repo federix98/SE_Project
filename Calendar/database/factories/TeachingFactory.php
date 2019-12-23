@@ -7,9 +7,9 @@ use Faker\Generator as Faker;
 $factory->define(App\Teaching::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'code' => $faker->word,
-        'CFU' => $faker->boolean,
-        'semester' => $faker->boolean,
+        'code' => $faker->bothify('#?#?'),
+        'CFU' => 6,
+        'semester' => $faker->numberBetween($min = 0, $max = 2),
         'lenguage' => $faker->word,
     ];
 });

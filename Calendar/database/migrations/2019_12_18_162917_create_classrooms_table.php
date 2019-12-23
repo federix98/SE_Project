@@ -17,7 +17,6 @@ class CreateClassroomsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('building_id')->nullable();
             $table->string('name', 45);
-            $table->string('address', 100);
             $table->tinyInteger('floor');
             $table->text('directions');
             $table->integer('capacity');
