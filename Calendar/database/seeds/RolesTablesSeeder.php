@@ -36,6 +36,22 @@ class RolesTablesSeeder extends Seeder
             ['id' => 2, 'name' => 'Coppito 1', 'address' => 'Via San Francesco 160'],
             ['id' => 3, 'name' => 'Coppito 2', 'address' => 'Via San Francesco 160'],
             ['id' => 4, 'name' => 'Roio', 'address' => 'Via San Benedetto 100'],
+            ['id' => 5, 'name' => 'Coppito -1', 'address' => 'Via fasulla 123'],
+            ['id' => 6, 'name' => 'Coppito 3', 'address' => 'Via fasulla 321'],
+            ['id' => 7, 'name' => 'Coppito 4', 'address' => 'Via San Francesco 160'],
+            ['id' => 8, 'name' => 'Roio 2', 'address' => 'Via San Benedetto 100'],
+            ['id' => 9, 'name' => 'Roio 3', 'address' => 'Via San Francesco 160'],
+            ['id' => 10, 'name' => 'Polo Lettere', 'address' => 'Via San Francesco 160'],
+            ['id' => 11, 'name' => 'Palazzo arancio', 'address' => 'Via San Francesco 160'],
+            ['id' => 12, 'name' => 'Roio 4', 'address' => 'Via San Benedetto 100'],
+            ['id' => 13, 'name' => 'Polo Medicina', 'address' => 'Via San Francesco 160'],
+            ['id' => 14, 'name' => 'Laboratori', 'address' => 'Via San Francesco 160'],
+            ['id' => 15, 'name' => 'Polo Industriale', 'address' => 'Via San Francesco 160'],
+            ['id' => 16, 'name' => 'Camion', 'address' => 'Via San Benedetto 100'],
+            ['id' => 17, 'name' => 'Coppito alla decima', 'address' => 'Via San Francesco 160'],
+            ['id' => 18, 'name' => 'Coppito n', 'address' => 'Via San Francesco 160'],
+            ['id' => 19, 'name' => 'Coppito x', 'address' => 'Via San Francesco 160'],
+            ['id' => 20, 'name' => 'New Roio', 'address' => 'Via San Benedetto 100'],
         ];
     
         foreach ($Buindings as $item) {

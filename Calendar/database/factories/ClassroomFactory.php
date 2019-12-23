@@ -6,12 +6,11 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Classroom::class, function (Faker $faker) {
     return [
-        'building_id' => $faker->randomNumber(),
-        'name' => $faker->name,
-        'address' => $faker->word,
-        'floor' => $faker->boolean,
-        'directions' => $faker->text,
-        'capacity' => $faker->randomNumber(),
-        'accessibility' => $faker->boolean,
+        'building_id' => $faker->numberBetween($min = 1, $max = 20),
+        'name' => $faker->numerify('aula C#.##'),
+        'floor' => $faker->numberBetween($min = 1, $max = 9),
+        'directions' => $faker->text($maxNbChars = 200),
+        'capacity' => $faker->numberBetween($min = 50, $max = 100),
+        'accessibility' => $faker->boolean($chanceOfGettingTrue = 95),
     ];
 });
