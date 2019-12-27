@@ -15,6 +15,7 @@ class CreateViewWeeklyLessonsTable extends Migration
     {
         Schema::create('view_weekly_lessons', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('lesson_id');
             $table->unsignedBigInteger('teaching_id');
             $table->unsignedBigInteger('classroom_id');
             $table->unsignedBigInteger('professor_id');
