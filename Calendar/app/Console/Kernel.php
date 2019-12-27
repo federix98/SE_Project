@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(new EventCalendarController)->everyMinute();
+        $schedule->call(new EventCalendarController)->everyMinute(); // per testare lo faccio partire ogni minuto
         //->weekly()->timezone('Europe/Rome');
     }
 

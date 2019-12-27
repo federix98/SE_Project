@@ -1,2 +1,1 @@
 nella vista ci sta un indice sulla colonna degli id dell'insegamento, quindi quando si vorranno ottenere gli insegnamenti di uno studente la prima cosa da fare sarà una query in cui mi prendo solo le lezioni degli insegnamenti dello studente, questo sarà meglio farlo anche quando chiederemo solo le lezioni di un giorno o di un mese
-
