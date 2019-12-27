@@ -18,17 +18,16 @@ class CreateViewWeeklyLessonsTable extends Migration
             $table->unsignedBigInteger('lesson_id');
             $table->unsignedBigInteger('teaching_id');
             $table->unsignedBigInteger('classroom_id');
-            $table->unsignedBigInteger('professor_id');
             $table->tinyInteger('week_day');
-            $table->boolean('canceled');
+            $table->boolean('canceled'); // 0 if not canceled, 1 if canceled
             $table->tinyInteger('start_time');
             $table->tinyInteger('duration');
             $table->string('teaching_name', 100);
             $table->string('classroom_name', 45);
-            $table->string('professor_name', 45);
-            $table->string('professor_surname', 45);
 
             $table->timestamps();
+
+            $table->index('teaching_id');
         });
     }
 
