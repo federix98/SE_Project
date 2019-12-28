@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\degree_special_event::class, function (Faker $faker) {
     return [
-        'degree_id' => $faker->numberBetween($min = 1, $max = 30),
-        'special_event_id' => $faker->numberBetween($min = 1, $max = 20),
+        'degree_id' => $faker->numberBetween($min = 1, $max = 60),
+        'special_event_id' => $faker->numberBetween($min = 1, $max = 200),
     ];
 });
