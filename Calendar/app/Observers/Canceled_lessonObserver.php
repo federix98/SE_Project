@@ -3,6 +3,11 @@
 namespace App\Observers;
 
 use App\Canceled_lesson;
+use Illuminate\Support\Facades\DB;
+use App\Teaching;
+use App\Classroom;
+use App\View_weekly_lesson;
+use Carbon\Carbon;
 
 class Canceled_lessonObserver
 {
@@ -14,7 +19,16 @@ class Canceled_lessonObserver
      */
     public function created(Canceled_lesson $canceledLesson)
     {
-        //
+        $day = Carbon::today()->dayOfWeek;
+        $date = Carbon::today()->addDays( ( 7 - $day ) );
+
+        if ( $date > $canceledLesson->date_lesson )
+        {
+            $viewLesson = DB::table('view_weekly_lessons')
+            ->where('view_weekly_lessons.lesson_id', '=', $canceledLesson->lesson_id )
+            ->where('view_weekly_lessons.type', '=', 0)
+            ->update(['canceled' => 1]);
+        }
     }
 
     /**
@@ -36,28 +50,15 @@ class Canceled_lessonObserver
      */
     public function deleted(Canceled_lesson $canceledLesson)
     {
-        //
-    }
+        $day = Carbon::today()->dayOfWeek;
+        $date = Carbon::today()->addDays( ( 7 - $day ) );
 
-    /**
-     * Handle the canceled_lesson "restored" event.
-     *
-     * @param  \App\Canceled_lesson  $canceledLesson
-     * @return void
-     */
-    public function restored(Canceled_lesson $canceledLesson)
-    {
-        //
-    }
-
-    /**
-     * Handle the canceled_lesson "force deleted" event.
-     *
-     * @param  \App\Canceled_lesson  $canceledLesson
-     * @return void
-     */
-    public function forceDeleted(Canceled_lesson $canceledLesson)
-    {
-        //
+        if ( $date > $canceledLesson->date_lesson )
+        {
+            $viewLesson = DB::table('view_weekly_lessons')
+            ->where('view_weekly_lessons.lesson_id', '=', $canceledLesson->lesson_id )
+            ->where('view_weekly_lessons.type', '=', 0)
+            ->update(['canceled' => 0]);
+        }
     }
 }

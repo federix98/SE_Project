@@ -6,8 +6,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Lesson::class, function (Faker $faker) {
     return [
-        'classroom_id' => $faker->numberBetween($min = 1, $max = 1000),
-        'teaching_id' => $faker->numberBetween($min = 1, $max = 8000),
+        'classroom_id' => $faker->numberBetween($min = 1, $max = 100),
+        'teaching_id' => $faker->numberBetween($min = 1, $max = 800),
         'start_time' => (( $faker->numberBetween($min = 9, $max = 16)*4 + 2 )),
         'duration' => $faker->numberBetween($min = 8, $max = 12),
         'week_day' => $faker->numberBetween($min = 0, $max = 5),

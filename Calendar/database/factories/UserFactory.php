@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'user_role_id' => 1,
-        'degree_id' => $faker->numberBetween($min = 1, $max = 15),
+        'degree_id' => $faker->numberBetween($min = 1, $max = 40),
         'name' => $faker->firstName,
         'surname' => $faker->lastName,
         'matric_no' => $faker->bothify('######'),
