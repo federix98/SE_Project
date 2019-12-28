@@ -39,7 +39,8 @@ class Canceled_lessonObserver
      */
     public function updated(Canceled_lesson $canceledLesson)
     {
-        //
+        Canceled_lessonObserver::deleted($canceledLesson);
+        Canceled_lessonObserver::created($canceledLesson); // i am the best programmer in the world
     }
 
     /**

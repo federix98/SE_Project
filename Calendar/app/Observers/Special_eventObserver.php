@@ -47,7 +47,8 @@ class Special_eventObserver
      */
     public function updated(Special_event $specialEvent)
     {
-        //
+        Special_eventObserver::deleted($specialEvent);
+        Special_eventObserver::created($specialEvent); // i am the best programmer in the world
     }
 
     /**

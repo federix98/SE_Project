@@ -47,7 +47,8 @@ class LessonObserver
      */
     public function updated(Lesson $lesson)
     {
-        //
+        LessonObserver::deleted($lesson);
+        LessonObserver::created($lesson); // i am the best programmer in the world
     }
 
     /**

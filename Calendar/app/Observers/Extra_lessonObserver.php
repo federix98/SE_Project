@@ -51,7 +51,8 @@ class Extra_lessonObserver
      */
     public function updated(Extra_lesson $extraLesson)
     {
-        //
+        Extra_lessonObserver::deleted($extraLesson);
+        Extra_lessonObserver::created($extraLesson); // i am the best programmer in the world
     }
 
     /**
