@@ -1,1 +1,11 @@
 nella vista ci sta un indice sulla colonna degli id dell'insegamento, quindi quando si vorranno ottenere gli insegnamenti di uno studente la prima cosa da fare sarà una query in cui mi prendo solo le lezioni degli insegnamenti dello studente, questo sarà meglio farlo anche quando chiederemo solo le lezioni di un giorno o di un mese
+
+l'aggiornamento della vista materializzata delle lezioni settimanali è stato gestito tramite un evento di schedule scritto all'interno del progetto laravel che parte, con orario programmato alle 00:00 della domenica mattina ogni inizio settimana, ogni volta la vista viene quindi liberata da tutte le sue entry per poi venire ripopolata dalle lezioni della prossima settimana.
+Per gli aggiornamenti infrasettimanali al calendario sono state utilizzate le observable class fornite da laravel, in questo modo la vista viene modificata anche durante la settimana quando c'è una modifica alle lezioni della stessa (settimana)
+
+abbiamo scelto di utilizzare le Observable class e lo schedule di laravel al posto di 'triggers' ed 'events' di MySQL per 3 motivi principali:
+1 - abbiamo potuto sfruttare Eloquent, che permette di scrivere query anche complesse più facilmente e soprattutto più velocemente.
+2 - abbiamo potuto lasciare tutta la logica all'interno del progetto Laravel, in caso di manutenzione del codice non si avrà bisogno di modificare codice su più progetti diversi.
+3 - il codice scritto non funzionerà solo su MySQL, ma potrà essere riutilizzato per qualsiasi database relazionale supportato da laravel
+
+il problema principale di utilizzare Eloquent è la velocità, le query scritte in Eloquent sono naturalmente più lente di query equivalenti scritte nel linguaggio del nativo del database, per capire se la velocità sarebbe stato un vero problema abbiamo fatto dei test ( con i numeri dell popolazione definiti precedentemente ) e abbiamo potuto osservare che l'evento richiedeva poco più di un minuto e mezzo ( su un portatile di fascia media/bassa ), processo nel quale venivano generate più di 16000 entry nella vista.

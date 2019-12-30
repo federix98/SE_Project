@@ -19,8 +19,8 @@ class PopulateSeeder extends Seeder
         factory('App\User', 800)->create();
         factory('App\Update', 800)->create();
         factory('App\Update', 800)->create();
-        factory('App\Lesson', 800)->create();
-        factory('App\Lesson', 800)->create();
+        factory('App\Lesson', 8000)->create();
+        factory('App\Lesson', 8000)->create();
         factory('App\Extra_lesson', 100)->create();
         factory('App\Canceled_lesson', 200)->create();
         factory('App\Special_event', 200)->create();

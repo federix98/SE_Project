@@ -24,7 +24,7 @@ class Special_eventObserver
         
         $classroom = Classroom::find($specialEvent->classroom_id);
         
-        if ( $date > $specialEvent->date_event )
+        if ( ( $date > $specialEvent->date_event  ) && ( $specialEvent->date_event > Carbon::yesterday() ) )
         {
             DB::table('view_weekly_lessons')->insertGetId( [
                 'lesson_id' => ($specialEvent->id),

@@ -22,7 +22,7 @@ class Canceled_lessonObserver
         $day = Carbon::today()->dayOfWeek;
         $date = Carbon::today()->addDays( ( 7 - $day ) );
 
-        if ( $date > $canceledLesson->date_lesson )
+        if ( ( $date > $canceledLesson->date_lesson ) && ( $canceledLesson->date_lesson > Carbon::yesterday() ) )
         {
             $viewLesson = DB::table('view_weekly_lessons')
             ->where('view_weekly_lessons.lesson_id', '=', $canceledLesson->lesson_id )

@@ -26,7 +26,7 @@ class Extra_lessonObserver
         $classroom = Classroom::find($extraLesson->classroom_id);
         $teaching = Teaching::find($extraLesson->teaching_id);
         
-        if ( $date > $extraLesson->date_lesson )
+        if ( ( $date > $extraLesson->date_lesson ) && ( $extraLesson->date_lesson > Carbon::yesterday() ))
         {
             DB::table('view_weekly_lessons')->insertGetId( [
                 'lesson_id' => ($extraLesson->id),
