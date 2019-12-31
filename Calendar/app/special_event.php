@@ -13,4 +13,19 @@ class Special_event extends Model
     ];
     
     protected $guarded = [];
+
+    public function classroom()
+    {
+        return $this->belongsTo('App\Classroom');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
+    
+    public function degrees()
+    {
+        return $this->belongsToMany('App\Degree');
+    }
 }

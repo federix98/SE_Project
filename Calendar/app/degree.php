@@ -9,11 +9,21 @@ class Degree extends Model
     protected $guarded = [];
     protected $hidden = ['id', 'created_at', 'updated_at'];
 
-    public function degree_group() {
-        return $this->belongsTo(degree_group::class);
+    public function degreeGroup() {
+        return $this->belongsTo('App\Degree_group');
     }
 
-    public function teachings() {
-        return $this->hasMany(teaching::class);
+    public function users() {
+        return $this->hasMany('App\User');
+    }
+
+    public function specialEvents()
+    {
+        return $this->belongsToMany('App\Special_event');
+    }
+
+    public function teachings()
+    {
+        return $this->belongsToMany('App\Teaching');
     }
 }

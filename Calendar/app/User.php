@@ -16,9 +16,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $guarded = [
-        'user_role_id',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -37,4 +35,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo('App\User_role','user_role_id');
+    }
+
+    public function degree()
+    {
+        return $this->belongsTo('App\Degree');
+    }
+
+    public function teachings()
+    {
+        return $this->belongsToMany('App\Teaching');
+    }
+
 }

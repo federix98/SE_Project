@@ -7,4 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     protected $guarded = [];
+
+    public function professors()
+    {
+        return $this->hasMany('App\Professor');
+    }
+
+    public function degreeGroups()
+    {
+        return $this->hasMany('App\Degree_group');
+    }
 }

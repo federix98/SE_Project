@@ -13,4 +13,9 @@ class Canceled_lesson extends Model
     ];
 
     protected $guarded = [];
+
+    public function lesson()
+    {
+        return $this->belongsTo('App\Lesson');
+    }
 }

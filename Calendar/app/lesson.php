@@ -13,4 +13,25 @@ class Lesson extends Model
     ];
     
     protected $guarded = [];
+
+    public function canceledLesson()
+    {
+        return $this->hasOne('App\Canceled_lesson');
+    }
+
+    public function classroom()
+    {
+        return $this->belongsTo('App\Classroom');
+    }
+
+    public function teaching()
+    {
+        return $this->belongsTo('App\Teaching');
+    }
+
+    public function isCanceled() // torna true se la lezione è stata cancellata
+    {
+        if( is_null( $this->canceledLesson )) return false;
+        return true;
+    }
 }

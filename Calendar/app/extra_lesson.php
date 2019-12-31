@@ -13,4 +13,16 @@ class Extra_lesson extends Model
     ];
 
     protected $guarded = [];
+
+    public function classroom()
+    {
+        return $this->belongsTo('App\Classroom');
+    }
+
+    public function teaching()
+    {
+        return $this->belongsTo('App\Teaching');
+    }
+
+
 }
