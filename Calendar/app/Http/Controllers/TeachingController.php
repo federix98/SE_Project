@@ -14,7 +14,7 @@ class TeachingController extends Controller
      */
     public function index()
     {
-        //
+        return teaching::all();
     }
 
     /**
@@ -35,7 +35,9 @@ class TeachingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $teaching = teaching::create($request->all());
+
+        return response()->json($teaching, 201);
     }
 
     /**
@@ -46,7 +48,7 @@ class TeachingController extends Controller
      */
     public function show(teaching $teaching)
     {
-        //
+        return $teaching;
     }
 
     /**

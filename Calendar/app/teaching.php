@@ -8,6 +8,7 @@ use App\Degree_teaching;
 class Teaching extends Model
 {
     protected $guarded = [];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function updates()
     {

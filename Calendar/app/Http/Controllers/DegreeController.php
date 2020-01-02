@@ -72,7 +72,7 @@ class DegreeController extends Controller
      */
     public function update(Request $request, degree $degree)
     {
-        $degree = degree::update($request->all());
+        $degree->update($request->all());
 
         return response()->json($degree, 200);
     }
