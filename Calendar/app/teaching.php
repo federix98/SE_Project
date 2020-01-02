@@ -37,7 +37,10 @@ class Teaching extends Model
 
     public function degrees()
     {
-        return $this->belongsToMany('App\Degree');
+        return $this->belongsToMany('App\Degree')->using('App\Degree_teaching')
+        ->withPivot([
+            'teaching_type_id'
+        ]);
     }
 
     public function getType( $degree_id ) // torna il tipo dellla lezione

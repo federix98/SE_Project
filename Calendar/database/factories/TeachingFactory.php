@@ -10,6 +10,6 @@ $factory->define(App\Teaching::class, function (Faker $faker) {
         'code' => $faker->bothify('#?#?'),
         'CFU' => 6,
         'semester' => $faker->numberBetween($min = 0, $max = 2),
-        'lenguage' => $faker->word,
+        'language' => $faker->word,
     ];
 });
