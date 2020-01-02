@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Degree extends Model
 {
     protected $guarded = [];
-    protected $hidden = ['id', 'created_at', 'updated_at'];
+    protected $visible = ['id', 'degree_group_id', 'name', 'year', 'SSD'];
 
     public function degreeGroup() {
         return $this->belongsTo('App\Degree_group');

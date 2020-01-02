@@ -14,7 +14,7 @@ class DegreeGroupController extends Controller
      */
     public function index()
     {
-        //
+        return degree_group::all();
     }
 
     /**
@@ -35,7 +35,9 @@ class DegreeGroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $degree_group = degree_group::create($request->all());
+
+        return response()->json($degree_group, 201);
     }
 
     /**
@@ -46,7 +48,7 @@ class DegreeGroupController extends Controller
      */
     public function show(degree_group $degree_group)
     {
-        //
+        return $degree_group;
     }
 
     /**
@@ -69,7 +71,9 @@ class DegreeGroupController extends Controller
      */
     public function update(Request $request, degree_group $degree_group)
     {
-        //
+        $degree_group->update($request->all());
+
+        return response()->json($degree_group, 200);
     }
 
     /**
@@ -80,6 +84,8 @@ class DegreeGroupController extends Controller
      */
     public function destroy(degree_group $degree_group)
     {
-        //
+        $degree_group->delete();
+
+        return response()->json(null, 204);
     }
 }

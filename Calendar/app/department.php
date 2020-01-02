@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     protected $guarded = [];
+    protected $visible = ['id', 'name'];
 
     public function professors()
     {

@@ -1,0 +1,31 @@
+public function index()
+    {
+        return ITEM::all();
+    }
+
+public function store(Request $request)
+    {
+        $ITEM = ITEM::create($request->all());
+
+        return response()->json($ITEM, 201);
+    }
+
+public function show(department $department)
+    {
+        return $ITEM;
+    }
+
+public function update(Request $request, department $department)
+    {
+        $ITEM->update($request->all());
+
+        return response()->json($ITEM, 200);
+    }
+
+public function destroy(department $department)
+    {
+        $ITEM->delete();
+
+        return response()->json(null, 204);
+    }
+}
