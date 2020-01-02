@@ -19,7 +19,7 @@ class CreateTeachingsTable extends Migration
             $table->string('code', 32);
             $table->tinyInteger('CFU');
             $table->tinyInteger('semester');
-            $table->string('lenguage', 32);
+            $table->string('language', 32);
 
             $table->timestamps();
         });
