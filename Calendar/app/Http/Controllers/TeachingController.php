@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\teaching;
 use Illuminate\Http\Request;
+use App\Http\Resources\Teaching as TeachingResource;
 
 class TeachingController extends Controller
 {
@@ -14,7 +15,7 @@ class TeachingController extends Controller
      */
     public function index()
     {
-        return teaching::all();
+        return TeachingResource::collection(teaching::all());
     }
 
     /**
@@ -48,7 +49,7 @@ class TeachingController extends Controller
      */
     public function show(teaching $teaching)
     {
-        return $teaching;
+        return new TeachingResource(teaching::find($teaching->id));
     }
 
     /**

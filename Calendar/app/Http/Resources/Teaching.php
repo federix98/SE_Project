@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Professor as ProfessorResource;
 
 class Teaching extends JsonResource
 {
@@ -21,6 +22,7 @@ class Teaching extends JsonResource
             'CFU' => $this->CFU,
             'semester' => $this->semester,
             'language' => $this->language,
+            'professors' => ProfessorResource::collection($this->professors),
         ];
     }
 }
