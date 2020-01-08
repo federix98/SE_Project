@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\lesson;
+use App\Http\Resources\Lesson as LessonResource;
+use App\Lesson;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
@@ -14,7 +15,7 @@ class LessonController extends Controller
      */
     public function index()
     {
-        //
+        return LessonResource::collection(Lesson::paginate(15));
     }
 
     /**

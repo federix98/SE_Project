@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\canceled_lesson;
+use App\Http\Resources\Canceled_lesson as Canceled_lessonResource;
+use App\Canceled_lesson;
 use Illuminate\Http\Request;
 
 class CanceledLessonController extends Controller
@@ -14,7 +15,7 @@ class CanceledLessonController extends Controller
      */
     public function index()
     {
-        //
+        return Canceled_lessonResource::collection(Canceled_lesson::paginate(15));
     }
 
     /**

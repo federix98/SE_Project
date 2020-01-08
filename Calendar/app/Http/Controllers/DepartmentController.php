@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\department;
+use App\Http\Resources\Department as DepartmentResource;
+use App\Department;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -14,7 +15,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        return department::all();
+        return DepartmentResource::collection(Department::paginate(15));
     }
 
     /**

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\special_event;
+use App\Http\Resources\Special_event as Special_eventResource;
+use App\Special_event;
 use Illuminate\Http\Request;
 
 class SpecialEventController extends Controller
@@ -14,7 +15,7 @@ class SpecialEventController extends Controller
      */
     public function index()
     {
-        //
+        return Special_eventResource::collection(Special_event::paginate(15));
     }
 
     /**

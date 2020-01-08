@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\degree;
+use App\Http\Resources\Degree as DegreeResource;
+use App\Degree;
 use Illuminate\Http\Request;
 
 class DegreeController extends Controller
@@ -14,7 +15,7 @@ class DegreeController extends Controller
      */
     public function index()
     {
-        return degree::all();
+        return DegreeResource::collection(Degree::paginate(15));
     }
 
     /**

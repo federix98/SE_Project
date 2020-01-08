@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\update;
+use App\Http\Resources\Update as UpdateResource;
+use App\Update;
 use Illuminate\Http\Request;
 
 class UpdateController extends Controller
@@ -14,7 +15,7 @@ class UpdateController extends Controller
      */
     public function index()
     {
-        //
+        return UpdateResource::collection(Update::paginate(15));
     }
 
     /**

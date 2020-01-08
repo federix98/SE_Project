@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\view_weekly_lesson;
+use App\Http\Resources\View_weekly_lesson as View_weekly_lessonResource;
+use App\View_weekly_lesson;
 use Illuminate\Http\Request;
 
 class ViewWeeklyLessonController extends Controller
@@ -14,7 +15,7 @@ class ViewWeeklyLessonController extends Controller
      */
     public function index()
     {
-        //
+        return View_weekly_lessonResource::collection(View_weekly_lesson::paginate(15));
     }
 
     /**

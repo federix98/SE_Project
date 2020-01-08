@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\teaching;
+use App\Http\Resources\Teaching as TeachingResource;
+use App\Teaching;
 use Illuminate\Http\Request;
 
 class TeachingController extends Controller
@@ -14,7 +15,7 @@ class TeachingController extends Controller
      */
     public function index()
     {
-        return teaching::all();
+        return TeachingResource::collection(Teaching::paginate(15));
     }
 
     /**
