@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Teaching as TeachingResource;
 use App\Teaching;
 use Illuminate\Http\Request;
+use App\Http\Resources\Teaching as TeachingResource;
 
 class TeachingController extends Controller
 {
@@ -49,7 +50,7 @@ class TeachingController extends Controller
      */
     public function show(teaching $teaching)
     {
-        return $teaching;
+        return new TeachingResource(teaching::find($teaching->id));
     }
 
     /**
