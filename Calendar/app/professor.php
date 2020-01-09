@@ -22,5 +22,4 @@ class Professor extends Model
     {
         return $this->belongsToMany('App\Teaching');
     }
-
 }
