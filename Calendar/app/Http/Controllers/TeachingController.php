@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\teaching;
 use Illuminate\Http\Request;
 use App\Http\Resources\Teaching as TeachingResource;
+use App\Http\Resources\Professor as ProfessorResource;
 
 class TeachingController extends Controller
 {
@@ -49,7 +50,8 @@ class TeachingController extends Controller
      */
     public function show(teaching $teaching)
     {
-        return new TeachingResource(teaching::find($teaching->id));
+        $teachingObj = teaching::find($teaching->id);
+        return new TeachingResource($teachingObj);
     }
 
     /**
@@ -84,5 +86,32 @@ class TeachingController extends Controller
     public function destroy(teaching $teaching)
     {
         //
+    }
+
+    /**
+     * Display a listing of professors by teaching
+     *
+     * @param  \App\teaching  $professor
+     * @return \Illuminate\Http\Response
+     */
+    public function getProfessors(teaching $teaching)
+    {
+        $teachingObj = teaching::find($teaching->id);
+        return ProfessorResource::collection($teachingObj->professors()->get());
+    }
+
+    /**
+     * Store professor in teaching
+     *
+     * @param  \App\teaching  $professor
+     * @return \Illuminate\Http\Response
+     */
+    public function storeProfessor(Request $request, teaching $teaching)
+    {
+        /*$professor = professor::find($request->id);
+        if(is_null($professor)) {
+            return response()->json("Professore non esistente", 404);
+        }
+        return ProfessorResource::collection($teachingObj->professors()->get());*/
     }
 }

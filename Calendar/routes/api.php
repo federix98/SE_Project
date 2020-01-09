@@ -44,3 +44,13 @@ Route::get('teachings/{teaching}', 'TeachingController@show');
 Route::post('teachings', 'TeachingController@store');
 Route::put('teachings/{teaching}', 'TeachingController@update');
 Route::delete('teachings/{teaching}', 'TeachingController@destroy');
+// Teaching Professors
+Route::get('teachings/{teaching}/professors', 'TeachingController@getProfessors');
+Route::post('teachings/{teaching}/professors', 'TeachingController@storeProfessor');
+
+// Professors CRUD Routes 
+Route::get('professors', 'ProfessorController@index');
+Route::get('professors/{professor}', 'ProfessorController@show');
+Route::post('professors', 'ProfessorController@store');
+Route::put('professors/{professor}', 'ProfessorController@update');
+Route::delete('professors/{professor}', 'ProfessorController@destroy');
