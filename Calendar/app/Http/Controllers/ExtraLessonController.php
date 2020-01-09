@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\extra_lesson;
+use App\Http\Resources\Extra_lesson as Extra_lessonResource;
+use App\Extra_lesson;
 use Illuminate\Http\Request;
 
 class ExtraLessonController extends Controller
@@ -14,7 +15,7 @@ class ExtraLessonController extends Controller
      */
     public function index()
     {
-        //
+        return Extra_lessonResource::collection(Extra_lesson::paginate(15));
     }
 
     /**

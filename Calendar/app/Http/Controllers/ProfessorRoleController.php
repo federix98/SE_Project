@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\professor_role;
+use App\Http\Resources\Professor_role as Professor_roleResource;
+use App\Professor_role;
 use Illuminate\Http\Request;
 
 class ProfessorRoleController extends Controller
@@ -14,7 +15,7 @@ class ProfessorRoleController extends Controller
      */
     public function index()
     {
-        //
+        return Professor_roleResource::collection(Professor_role::paginate(15));
     }
 
     /**

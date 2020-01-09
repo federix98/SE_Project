@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\professor;
-use Illuminate\Http\Request;
 use App\Http\Resources\Professor as ProfessorResource;
+use App\Professor;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProfessorController extends Controller
 {
@@ -15,7 +16,7 @@ class ProfessorController extends Controller
      */
     public function index()
     {
-        return ProfessorResource::collection(professor::all());
+        return ProfessorResource::collection(Professor::paginate(15));
     }
 
     /**
@@ -84,5 +85,25 @@ class ProfessorController extends Controller
         //
     }
 
-    
+    /**
+     * ritorna la lista dei professori dell'utente che ha eseguito il login
+     */
+    public function getMyProfessors()
+    {
+        $collection = collect();
+        $teachingIDs = app('App\Http\Controllers\TeachingController')->getMyTeachings();
+
+        foreach( $teachingIDs as $teachingID)
+        {
+            $professors = DB::table('professor_teaching')
+            ->where('professor_teaching.teaching_id', '=', $teachingID->teaching_id ) 
+            ->select('professors.*')
+            ->join('professors', 'professor_teaching.professor_id', '=', 'professors.id')
+            ->get();
+
+            foreach( $professors as $professor ) $collection->push($professor);
+        }
+
+        return $collection;
+    }
 }

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\user_role;
+use App\Http\Resources\User_role as User_roleResource;
+use App\User_role;
 use Illuminate\Http\Request;
 
 class UserRoleController extends Controller
@@ -14,7 +15,7 @@ class UserRoleController extends Controller
      */
     public function index()
     {
-        //
+        return User_roleResource::collection(User_role::paginate(15));
     }
 
     /**

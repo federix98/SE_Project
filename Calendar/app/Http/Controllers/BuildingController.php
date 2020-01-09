@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\building;
+use App\Http\Resources\Building as BuildingResource;
+use App\Building;
 use Illuminate\Http\Request;
 
 class BuildingController extends Controller
@@ -14,7 +15,7 @@ class BuildingController extends Controller
      */
     public function index()
     {
-        //
+        return BuildingResource::collection(Building::paginate(15));
     }
 
     /**

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\teaching;
-use Illuminate\Http\Request;
 use App\Http\Resources\Teaching as TeachingResource;
 use App\Http\Resources\Professor as ProfessorResource;
+use App\Teaching;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TeachingController extends Controller
 {
@@ -16,7 +17,7 @@ class TeachingController extends Controller
      */
     public function index()
     {
-        return TeachingResource::collection(teaching::all());
+        return TeachingResource::collection(Teaching::paginate(15));
     }
 
     /**
@@ -113,5 +114,30 @@ class TeachingController extends Controller
             return response()->json("Professore non esistente", 404);
         }
         return ProfessorResource::collection($teachingObj->professors()->get());*/
+    }
+    /** 
+     * ritorna la lista degli id degli insegnamenti dell'utente loggato
+    */
+
+    public function getMyTeachings()
+    {
+        $user = auth()->user();
+
+        if( $user->personal_calendar == 0 )  
+        {
+            $teachingIDs = DB::table('degree_teaching')
+            ->where('degree_teaching.degree_id', '=', $user->degree_id ) 
+            ->select('degree_teaching.teaching_id')
+            ->get();
+        }
+        else
+        {
+            $teachingIDs = DB::table('teaching_user')
+            ->where('teaching_user.user_id', '=', $user->id ) 
+            ->select('teaching_user.teaching_id')
+            ->get();
+        }
+
+        return $teachingIDs;
     }
 }
