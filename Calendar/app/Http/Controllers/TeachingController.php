@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Teaching as TeachingResource;
+use App\Http\Resources\Professor as ProfessorResource;
 use App\Teaching;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -50,7 +51,8 @@ class TeachingController extends Controller
      */
     public function show(teaching $teaching)
     {
-        return new TeachingResource(teaching::find($teaching->id));
+        $teachingObj = teaching::find($teaching->id);
+        return new TeachingResource($teachingObj);
     }
 
     /**
@@ -86,4 +88,59 @@ class TeachingController extends Controller
     {
         //
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Display a listing of professors by teaching
+     *
+     * @param  \App\teaching  $professor
+     * @return \Illuminate\Http\Response
+     */
+    public function getProfessors(teaching $teaching)
+    {
+        $teachingObj = teaching::find($teaching->id);
+        return ProfessorResource::collection($teachingObj->professors()->get());
+    }
+
+    /**
+     * Store professor in teaching
+     *
+     * @param  \App\teaching  $professor
+     * @return \Illuminate\Http\Response
+     */
+    public function storeProfessor(Request $request, teaching $teaching)
+    {
+        /*$professor = professor::find($request->id);
+        if(is_null($professor)) {
+            return response()->json("Professore non esistente", 404);
+        }
+        return ProfessorResource::collection($teachingObj->professors()->get());*/
+    }
+    /** 
+     * ritorna la lista degli id degli insegnamenti dell'utente loggato
+    */
+
+    public function getMyTeachings()
+    {
+        $user = auth()->user();
+
+        if( $user->personal_calendar == 0 )  
+        {
+            $teachingIDs = DB::table('degree_teaching')
+            ->where('degree_teaching.degree_id', '=', $user->degree_id ) 
+            ->select('degree_teaching.teaching_id')
+            ->get();
+        }
+        else
+        {
+            $teachingIDs = DB::table('teaching_user')
+            ->where('teaching_user.user_id', '=', $user->id ) 
+            ->select('teaching_user.teaching_id')
+            ->get();
+        }
+
+        return $teachingIDs;
+    }
+>>>>>>> 77886573ab45ad249b4da421222d0f047ca0f39c
 }
