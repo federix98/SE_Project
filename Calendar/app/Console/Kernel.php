@@ -2,11 +2,11 @@
 
 namespace App\Console;
 
+use App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Carbon\Carbon;
-use App\Http\Controllers\EventCalendarController;
 
 class Kernel extends ConsoleKernel
 {
@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(new EventCalendarController)->everyMinute(); // per testare lo faccio partire ogni minuto
+        $schedule->call(new App\Http\Controllers\EventCalendarController)->everyMinute(); // per testare lo faccio partire ogni minuto
         //->weekly()->timezone('Europe/Rome');
     }
 

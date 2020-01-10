@@ -6,6 +6,7 @@ use App\Http\Resources\Professor as ProfessorResource;
 use App\Professor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Utility\StaticMethod\Retrievable;
 
 class ProfessorController extends Controller
 {
@@ -90,7 +91,7 @@ class ProfessorController extends Controller
     public function getMyProfessors()
     {
         $collection = collect();
-        $teachingIDs = app('App\Http\Controllers\TeachingController')->getMyTeachings();
+        $teachingIDs = Retrievable::getMyTeachings();
 
         foreach( $teachingIDs as $teachingID)
         {
