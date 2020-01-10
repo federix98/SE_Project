@@ -49,7 +49,7 @@ class ProfessorController extends Controller
      */
     public function show(professor $professor)
     {
-        //
+        return new ProfessorResource(professor::find($professor->id));
     }
 
     /**
@@ -85,6 +85,7 @@ class ProfessorController extends Controller
     {
         //
     }
+
     /**
      * ritorna la lista dei professori dell'utente che ha eseguito il login
      */
