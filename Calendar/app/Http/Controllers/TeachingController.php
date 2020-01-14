@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Teaching as TeachingResource;
 use App\Http\Resources\Professor as ProfessorResource;
 use App\Teaching;
+use App\professor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -75,7 +76,9 @@ class TeachingController extends Controller
      */
     public function update(Request $request, teaching $teaching)
     {
-        //
+        $teaching->update($request->all());
+
+        return response()->json($teaching, 200);
     }
 
     /**
@@ -86,7 +89,9 @@ class TeachingController extends Controller
      */
     public function destroy(teaching $teaching)
     {
-        //
+        $degree->delete();
+
+        return response()->json(null, 204);
     }
 
     /**
@@ -98,27 +103,55 @@ class TeachingController extends Controller
     public function getProfessors(teaching $teaching)
     {
         $teachingObj = teaching::find($teaching->id);
-        return ProfessorResource::collection($teachingObj->professors()->get());
+        return ProfessorResource::collection($teachingObj->professors);
     }
 
     /**
      * Store professor in teaching
      *
-     * @param  \App\teaching  $professor
+     * @param  \App\professor  $professor
      * @return \Illuminate\Http\Response
      */
     public function storeProfessor(Request $request, teaching $teaching)
     {
-        /*$professor = professor::find($request->id);
+        $professor = professor::find($request->id);
         if(is_null($professor)) {
             return response()->json("Professore non esistente", 404);
         }
-        return ProfessorResource::collection($teachingObj->professors()->get());*/
+
+        $teaching = teaching::find($teaching->id);
+        $teaching->professors()->attach($professor->id);
+        
+        return response()->json(new TeachingResource($teaching), 201);
     }
+
+    /**
+     * Destroy professor in teaching
+     *
+     * @param  \App\professor  $professor
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyProfessor(Request $request, teaching $teaching, professor $professor)
+    {
+        $professor = professor::find($professor->id);
+        $teaching = teaching::find($teaching->id);
+
+        if(is_null($professor)) {
+            return response()->json("Professore non esistente", 404);
+        }
+
+        if(is_null($teaching->professors()->find($professor->id))) {
+            return response()->json("Professore non esistente sull'insegnamento", 404);
+        }
+
+        $teaching->professors()->detach($professor->id);
+        
+        return response()->json(new TeachingResource($teaching), 200);
+    }
+    
     /** 
      * ritorna la lista degli id degli insegnamenti dell'utente loggato
     */
-
     public function getMyTeachings()
     {
         $user = auth()->user();

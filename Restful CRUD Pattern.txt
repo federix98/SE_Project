@@ -29,3 +29,10 @@ public function destroy(department $department)
         return response()->json(null, 204);
     }
 }
+
+7/01 -> 1.30h
+8/01 -> 1h
+9/01 -> 2h
+
+
+validazione -> validator

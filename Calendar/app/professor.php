@@ -20,6 +20,7 @@ class Professor extends Model
 
     public function teachings()
     {
-        return $this->hasMany('App\Teaching');
+        return $this->belongsToMany('App\Teaching');
     }
+
 }

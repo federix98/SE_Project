@@ -47,6 +47,7 @@ Route::delete('teachings/{teaching}', 'TeachingController@destroy');
 // Teaching Professors
 Route::get('teachings/{teaching}/professors', 'TeachingController@getProfessors');
 Route::post('teachings/{teaching}/professors', 'TeachingController@storeProfessor');
+Route::delete('teachings/{teaching}/professors/{professor}', 'TeachingController@destroyProfessor');
 
 // Professors CRUD Routes 
 Route::get('professors', 'ProfessorController@index');
