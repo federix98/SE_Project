@@ -6,6 +6,7 @@ use App\Http\Resources\View_weekly_lesson as View_weekly_lessonResource;
 use App\View_weekly_lesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Utility\StaticMethod\Retrievable;
 
 class ViewWeeklyLessonController extends Controller
 {
@@ -90,7 +91,7 @@ class ViewWeeklyLessonController extends Controller
      */
     public function getMyCalendar()
     {
-        $teachingIDs = app('App\Http\Controllers\TeachingController')->getMyTeachings();
+        $teachingIDs = Retrievable::getMyTeachings();
 
         $eventIDs = DB::table('degree_special_event')
         ->where('degree_special_event.degree_id', '=', auth()->user()->degree_id ) 

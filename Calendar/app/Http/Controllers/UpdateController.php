@@ -6,6 +6,7 @@ use App\Http\Resources\Update as UpdateResource;
 use App\Update;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Utility\StaticMethod\Retrievable;
 
 class UpdateController extends Controller
 {
@@ -91,7 +92,7 @@ class UpdateController extends Controller
      */
     public function checkNewUpdates()
     {
-        $teachingIDs = app('App\Http\Controllers\TeachingController')->getMyTeachings();
+        $teachingIDs = Retrievable::getMyTeachings();
         
         $updates = DB::table('updates')
         ->whereDate('updates.created_at', '>', auth()->user()->LAU)

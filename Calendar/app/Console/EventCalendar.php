@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console\EventCalendar;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\View_weekly_lesson;
 
-class EventCalendarController extends Controller
+class EventCalendar
 {
   public function __invoke(Request $request)
   {

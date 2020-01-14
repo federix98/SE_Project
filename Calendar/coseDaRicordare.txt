@@ -1,2 +1,50 @@
 nella vista ci sta un indice sulla colonna degli id dell'insegamento, quindi quando si vorranno ottenere gli insegnamenti di uno studente la prima cosa da fare sarà una query in cui mi prendo solo le lezioni degli insegnamenti dello studente, questo sarà meglio farlo anche quando chiederemo solo le lezioni di un giorno o di un mese
 
+   public function store(Request $request)
+    {
+        $request->validate([
+            'first_name'=>'required',
+            'last_name'=>'required',
+            'email'=>'required'
+        ]);
+
+        $contact = new Contact([
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
+            'email' => $request->get('email'),
+            'job_title' => $request->get('job_title'),
+            'city' => $request->get('city'),
+            'country' => $request->get('country')
+        ]);
+        $contact->save();
+        return redirect('/contacts')->with('success', 'Contact saved!');
+    }
+
+     public function update(Request $request, $id)
+    {
+        $request->validate([
+            'first_name'=>'required',
+            'last_name'=>'required',
+            'email'=>'required'
+        ]);
+
+        $contact = Contact::find($id);
+        $contact->first_name =  $request->get('first_name');
+        $contact->last_name = $request->get('last_name');
+        $contact->email = $request->get('email');
+        $contact->job_title = $request->get('job_title');
+        $contact->city = $request->get('city');
+        $contact->country = $request->get('country');
+        $contact->save();
+
+        return redirect('/contacts')->with('success', 'Contact updated!');
+    }
+
+
+     public function destroy($id)
+    {
+        $contact = Contact::find($id);
+        $contact->delete();
+
+        return redirect('/contacts')->with('success', 'Contact deleted!');
+    }
