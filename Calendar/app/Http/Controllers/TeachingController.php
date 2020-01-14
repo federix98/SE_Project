@@ -52,8 +52,7 @@ class TeachingController extends Controller
      */
     public function show(teaching $teaching)
     {
-        $teachingObj = teaching::find($teaching->id);
-        return new TeachingResource($teachingObj);
+        return new TeachingResource($teaching);
     }
 
     /**

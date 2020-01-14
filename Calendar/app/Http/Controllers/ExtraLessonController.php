@@ -36,7 +36,9 @@ class ExtraLessonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lesson = lesson::create($request->all());
+
+        return response()->json($lesson, 201);
     }
 
     /**
@@ -47,7 +49,7 @@ class ExtraLessonController extends Controller
      */
     public function show(extra_lesson $extra_lesson)
     {
-        //
+        return new Extra_lessonResource($extra_lesson);
     }
 
     /**
@@ -70,7 +72,8 @@ class ExtraLessonController extends Controller
      */
     public function update(Request $request, extra_lesson $extra_lesson)
     {
-        //
+        $extra_lesson->update($request->all());
+        return response()->json($extra_lesson, 200);
     }
 
     /**
@@ -81,6 +84,7 @@ class ExtraLessonController extends Controller
      */
     public function destroy(extra_lesson $extra_lesson)
     {
-        //
+        $extra_lesson->delete();
+        return response()->json(null, 204);
     }
 }
