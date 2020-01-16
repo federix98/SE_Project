@@ -82,6 +82,23 @@ Route::prefix('v1')->group(function () {
 
     // Anonymous
     Route::get('degrees/{degree}/calendar', 'DegreeController@getCalendar');
+    Route::get('degrees/{degree}/calendar/month', 'DegreeController@getMonthlyCalendar');
     Route::get('degrees/{degree}/current', 'DegreeController@getCurrentLessons');
+    Route::get('degrees/{degree}/professors', 'DegreeController@getProfessors');
+
+    // Auth Users
+    Route::group([
+        'prefix' => 'auth'
+    ], function () {
+        Route::post('login', 'AuthController@login');
+        Route::post('signup', 'AuthController@signup');
+      
+        Route::group([
+          'middleware' => 'auth:api'
+        ], function() {
+            Route::get('logout', 'AuthController@logout');
+            Route::get('user', 'AuthController@user');
+        });
+    });
 
 });

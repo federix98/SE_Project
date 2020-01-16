@@ -1,0 +1,11 @@
+php artisan passport:client
+
+Input
+
+Client ID : 12
+Name : TestClient
+redirectTo : http://localhost/
+
+Output 
+Client ID : 3
+Client secret : ilSBAY3WnuwuPkSjF3A1C9Brcoml7VChgJuRZFli

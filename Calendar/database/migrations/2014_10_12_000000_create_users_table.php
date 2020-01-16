@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('surname', 45);
             $table->string('matric_no', 7);
             $table->string('email', 254)->unique();
-            $table->string('password',32);
+            $table->string('password',60);
             $table->boolean('personal_calendar')->default(0); // 1 if the user has a personalized calendar
             $table->timestamp('LAU');
 
