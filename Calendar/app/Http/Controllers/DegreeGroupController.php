@@ -89,4 +89,6 @@ class DegreeGroupController extends Controller
 
         return response()->json(null, 204);
     }
+
+    
 }

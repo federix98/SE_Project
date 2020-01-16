@@ -69,6 +69,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('lessons/{lesson}', 'LessonController@destroy');
     Route::post('lessons/{lesson}/cancel', 'LessonController@cancel');
     Route::patch('lessons/{lesson}/classroom/{classroom}', 'LessonController@changeClassroom');
+    Route::patch('lessons/{lesson}/time', 'LessonController@changeTime');
 
     // Extra Lessons
     Route::get('extra_lessons', 'ExtraLessonController@index');
@@ -76,4 +77,11 @@ Route::prefix('v1')->group(function () {
     Route::post('extra_lessons', 'ExtraLessonController@store');
     Route::put('extra_lessons/{extra_lesson}', 'ExtraLessonController@update');
     Route::delete('extra_lessons/{extra_lesson}', 'ExtraLessonController@destroy');
+
+    // --- Student APIs ---
+
+    // Anonymous
+    Route::get('degrees/{degree}/calendar', 'DegreeController@getCalendar');
+    Route::get('degrees/{degree}/current', 'DegreeController@getCurrentLessons');
+
 });

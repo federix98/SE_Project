@@ -7,6 +7,7 @@ use App\Http\Resources\Lesson as LessonResource;
 use App\Lesson;
 use App\canceled_lesson;
 use App\Classroom;
+use App\Update;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
@@ -121,6 +122,7 @@ class LessonController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\lesson  $lesson
+     * @param  \App\classroom  $classroom
      * @return \Illuminate\Http\Response
      */
     public function changeClassroom(Request $request, lesson $lesson, classroom $classroom)
@@ -135,6 +137,42 @@ class LessonController extends Controller
 
         $lesson->update([
             'classroom_id' => $classroom->id,
+        ]);
+
+        // Creazione notifica
+        /*
+        $update = new Update;
+        $teaching_name = Teaching::find($lesson->teaching_id)->name;
+
+        $update->teaching_id = $lesson->teaching_id;
+        $update->title = "Cambio di aula - " . $teaching_name;
+        $update->info = "La lezione di " . $teaching_name . " del giorno " . 
+        */
+        return response()->json($lesson, 200);
+    }
+
+
+    /**
+     * Cambio orario
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\lesson  $lesson
+     * @return \Illuminate\Http\Response
+     */
+    public function changeTime(Request $request, lesson $lesson)
+    {
+        if(is_null($lesson)) {
+            return response()->json("Lezione non esistente nel sistema", 400);
+        }
+
+        $request->validate([
+            'start_time' => 'required|numeric',
+            'duration' => 'required|numeric',
+        ]);
+
+        $lesson->update([
+            'start_time' => $request->start_time,
+            'duration' => $request->duration,
         ]);
 
         return response()->json($lesson, 200);

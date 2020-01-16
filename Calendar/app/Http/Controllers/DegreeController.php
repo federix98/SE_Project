@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\Degree as DegreeResource;
 use App\Degree;
+use Carbon\Carbon;
+use App\view_weekly_lesson;
+use App\Http\Resources\View_weekly_lesson as CalendarResource;
 use Illuminate\Http\Request;
 
 class DegreeController extends Controller
@@ -50,7 +53,7 @@ class DegreeController extends Controller
      */
     public function show(degree $degree)
     {
-        return $degree;
+        return new DegreeResource($degree);
     }
 
     /**
@@ -89,5 +92,49 @@ class DegreeController extends Controller
         $degree->delete();
 
         return response()->json(null, 204);
+    }
+
+    /**
+     * Get Calendar from degree
+     *
+     * @param  \App\degree  $degree
+     * @return \Illuminate\Http\Response
+     */
+    public function getCalendar(degree $degree) {
+
+        $teaching_ids = $degree->teachings->pluck('id');
+        
+        return CalendarResource::collection(view_weekly_lesson::whereIn('teaching_id', $teaching_ids)->get());
+    }
+
+    /**
+     * Get Current Lessons from degree
+     *
+     * @param  \App\degree  $degree
+     * @return \Illuminate\Http\Response
+     */
+    public function getCurrentLessons(degree $degree) {
+        
+        $teaching_ids = $degree->teachings->pluck('id');
+        $my_weekly_lessons = view_weekly_lesson::whereIn('teaching_id', $teaching_ids);
+        
+        $actual_ts = Carbon::now()->timestamp;
+        $today_ts = Carbon::today()->timestamp;
+
+        // Secondi passati dall'inizio della giornata
+        $now_ts = $actual_ts - $today_ts;
+
+        // 15 min = 900 sec
+        $now_slot = floor($now_ts / 900);
+        // Lezioni che mi interessano : start_time <= now AND start_time + duration > now
+
+        $current_lessons = $my_weekly_lessons->where([
+            ['start_time', '<=', $now_slot]
+            //['start_time', '>', $now_slot . ' - duration']
+        ])->whereRaw('start_time + duration > ?', [$now_slot])
+        ->get();
+
+        return CalendarResource::collection($current_lessons);
+
     }
 }
