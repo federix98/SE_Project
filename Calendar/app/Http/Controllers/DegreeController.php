@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Degree as DegreeResource;
 use App\Http\Resources\View_weekly_lesson as CalendarResource;
 use App\Http\Resources\Professor as ProfessorResource;
+use app\Http\Resources\Teaching as TeachingResource;
 use App\Degree;
 use Carbon\Carbon;
 use App\view_weekly_lesson;
@@ -102,10 +103,9 @@ class DegreeController extends Controller
      * @param  \App\degree  $degree
      * @return \Illuminate\Http\Response
      */
-    public function getCalendar(degree $degree) {
-
-        $teaching_ids = $degree->teachings->pluck('id');
-        
+    public function getCalendar(degree $degree) 
+    {
+        $teaching_ids = $degree->teachings->pluck('id');   
         return CalendarResource::collection(view_weekly_lesson::whereIn('teaching_id', $teaching_ids)->get());
     }
 
@@ -164,6 +164,6 @@ class DegreeController extends Controller
      */
     public function getTeachings(degree $degree)
     {
-        // DA IMPLEMENTARE
+        return TeachingResource::collection($degree->teachings);
     }
 }
