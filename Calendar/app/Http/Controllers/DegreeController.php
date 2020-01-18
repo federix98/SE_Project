@@ -155,4 +155,15 @@ class DegreeController extends Controller
         
         return ProfessorResource::collection($my_professors);
     }
+
+    /**
+     * Get Teachings from Degree
+     *
+     * @param  \App\degree  $degree
+     * @return \Illuminate\Http\Response
+     */
+    public function getTeachings(degree $degree)
+    {
+        // DA IMPLEMENTARE
+    }
 }

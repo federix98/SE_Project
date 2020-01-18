@@ -41,6 +41,12 @@ class AuthController extends Controller
         ], 201);
     }
 
+    public function extSignup(Request $request)
+    {
+        // DA IMPLEMENTARE
+    }
+
+  
     /**
      * Login user and create token
      *

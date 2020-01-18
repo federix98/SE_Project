@@ -100,4 +100,14 @@ class ProfessorController extends Controller
 
         return ProfessorResource::collection($my_professors);
     }
+
+    /**
+     * Search professor
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        // DA IMPLEMENTARE
+    }
 }

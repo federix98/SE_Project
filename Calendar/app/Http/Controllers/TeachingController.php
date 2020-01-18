@@ -108,7 +108,7 @@ class TeachingController extends Controller
     /**
      * Store professor in teaching
      *
-     * @param  \App\professor  $professor
+     * @param  \App\teaching  $teaching
      * @return \Illuminate\Http\Response
      */
     public function storeProfessor(Request $request, teaching $teaching)
@@ -128,6 +128,7 @@ class TeachingController extends Controller
      * Destroy professor in teaching
      *
      * @param  \App\professor  $professor
+     * @param  \App\teaching  $teaching
      * @return \Illuminate\Http\Response
      */
     public function destroyProfessor(Request $request, teaching $teaching, professor $professor)
@@ -148,4 +149,13 @@ class TeachingController extends Controller
         return response()->json(new TeachingResource($teaching), 200);
     }
     
+    /**
+     * Search teaching
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        // DA IMPLEMENTARE
+    }
 }
