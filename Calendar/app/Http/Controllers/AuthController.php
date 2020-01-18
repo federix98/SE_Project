@@ -40,6 +40,12 @@ class AuthController extends Controller
             'message' => 'Successfully created user!'
         ], 201);
     }
+
+    public function extSignup(Request $request)
+    {
+        // DA IMPLEMENTARE
+    }
+
   
     /**
      * Login user and create token
