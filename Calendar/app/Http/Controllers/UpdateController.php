@@ -92,17 +92,15 @@ class UpdateController extends Controller
      */
     public function checkNewUpdates()
     {
-        $teachingIDs = Retrievable::getMyTeachings();
+        $user = auth()->user();
+        if( $user->personal_calendar == 0 ) $teaching_ids = $user->degree->teachings->pluck('id');
+        else $teaching_ids = $user->teachings->pluck('id');
         
-        $updates = DB::table('updates')
-        ->whereDate('updates.created_at', '>', auth()->user()->LAU)
-        ->select('updates.teaching_id')
-        ->get();
+        $updates = update::whereHas('teaching', function($query) use($teaching_ids) {
+            $query->whereIn('teachings.id', $teaching_ids)->whereDate('updates.created_at', '>',  auth()->user()->LAU);
+        })->get();
 
-        foreach ($updates as $update) 
-        {
-            foreach($teachingIDs as $teachingID){ if( $teachingID->teaching_id = $update->teaching_id ) return true; }
-        }
-        return false;
+        if ($updates->isEmpty()) return false;
+        return true;
     }
 }

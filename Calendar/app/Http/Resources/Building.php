@@ -16,7 +16,7 @@ class Building extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nddame' => $this->name,
+            'name' => $this->name,
             'address' => $this->address
         ];
     }

@@ -91,36 +91,30 @@ class ViewWeeklyLessonController extends Controller
      */
     public function getMyCalendar()
     {
-        $teachingIDs = Retrievable::getMyTeachings();
+        $user = auth()->user();
+        if( $user->personal_calendar == 0 ) $teaching_ids = $user->degree->teachings->pluck('id');
+        else $teaching_ids = $user->teachings->pluck('id');
 
-        $eventIDs = DB::table('degree_special_event')
-        ->where('degree_special_event.degree_id', '=', auth()->user()->degree_id ) 
-        ->select('degree_special_event.special_event_id')
-        ->get();
+        $eventIDs = $user->degree->specialEvents->pluck('id');
 
         $collection = collect();
 
-        foreach ($teachingIDs as $teachingID) 
-        {
-            $lessons = DB::table('view_weekly_lessons')
-            ->where('view_weekly_lessons.teaching_id', '=', $teachingID->teaching_id ) 
-            ->select('view_weekly_lessons.*')
-            ->get();
+        $lessons = DB::table('view_weekly_lessons')
+        ->whereIn('lesson_id', $teaching_ids)
+        ->where('view_weekly_lessons.type', '!=', 2 )
+        ->select('view_weekly_lessons.*')
+        ->get();
 
-            foreach( $lessons as $lesson ) $collection->push($lesson);
-        }
+        foreach( $lessons as $lesson ) $collection->push($lesson);
 
-        foreach ($eventIDs as $eventID) 
-        {
-            $events = DB::table('view_weekly_lessons')
-            ->where('view_weekly_lessons.lesson_id', '=', $eventID->special_event_id )
-            ->where('view_weekly_lessons.type', '=', 2 )
-            ->select('view_weekly_lessons.*')
-            ->get();
+        $events = DB::table('view_weekly_lessons')
+        ->whereIn('lesson_id', $eventIDs)
+        ->where('view_weekly_lessons.type', '=', 2 )
+        ->select('view_weekly_lessons.*')
+        ->get();
 
-            foreach( $events as $event ) $collection->push($event);
-        }
+        foreach( $events as $event ) $collection->push($event);
 
-        return $collection;
+        return View_weekly_lessonResource::collection($collection);
     }
 }

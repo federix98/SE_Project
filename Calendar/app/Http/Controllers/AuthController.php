@@ -40,7 +40,7 @@ class AuthController extends Controller
             'message' => 'Successfully created user!'
         ], 201);
     }
-  
+
     /**
      * Login user and create token
      *
@@ -77,7 +77,7 @@ class AuthController extends Controller
             )->toDateTimeString()
         ]);
     }
-  
+
     /**
      * Logout user (Revoke the token)
      *
@@ -90,7 +90,7 @@ class AuthController extends Controller
             'message' => 'Successfully logged out'
         ]);
     }
-  
+
     /**
      * Get the authenticated User
      *

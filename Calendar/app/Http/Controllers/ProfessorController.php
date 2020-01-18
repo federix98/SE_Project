@@ -6,7 +6,6 @@ use App\Http\Resources\Professor as ProfessorResource;
 use App\Professor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Utility\StaticMethod\Retrievable;
 
 class ProfessorController extends Controller
 {
@@ -90,21 +89,15 @@ class ProfessorController extends Controller
      * ritorna la lista dei professori dell'utente che ha eseguito il login
      */
     public function getMyProfessors()
-    {
-        $collection = collect();
-        $teachingIDs = Retrievable::getMyTeachings();
+    {   
+        $user = auth()->user();
+        if( $user->personal_calendar == 0 ) $teaching_ids = $user->degree->teachings->pluck('id');
+        else $teaching_ids = $user->teachings->pluck('id');
 
-        foreach( $teachingIDs as $teachingID)
-        {
-            $professors = DB::table('professor_teaching')
-            ->where('professor_teaching.teaching_id', '=', $teachingID->teaching_id ) 
-            ->select('professors.*')
-            ->join('professors', 'professor_teaching.professor_id', '=', 'professors.id')
-            ->get();
+        $my_professors = professor::whereHas('teachings', function($query) use($teaching_ids) {
+            $query->whereIn('teachings.id', $teaching_ids);
+        })->get();
 
-            foreach( $professors as $professor ) $collection->push($professor);
-        }
-
-        return $collection;
+        return ProfessorResource::collection($my_professors);
     }
 }
