@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\Canceled_lessonObserver;
 
-class Canceled_lesson extends Model
+class CanceledLesson extends Model
 {
     protected $dispatchesEvents = [
         'created' => Canceled_lessonObserver::class,

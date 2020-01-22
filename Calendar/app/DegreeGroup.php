@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Degree_group extends Model
+class DegreeGroup extends Model
 {
     protected $guarded = [];
     protected $visible = ['id', 'name'];

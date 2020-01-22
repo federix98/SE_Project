@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\Special_eventObserver;
 
-class Special_event extends Model
+class SpecialEvent extends Model
 {
     protected $dispatchesEvents = [
         'created' => Special_eventObserver::class,

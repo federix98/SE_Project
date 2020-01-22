@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Degree_teaching extends Pivot
+class DegreeTeaching extends Pivot
 {
     protected $guarded = [];
 

@@ -2,22 +2,22 @@
 
 namespace App\Observers;
 
-use App\Special_event;
+use App\SpecialEvent;
 use Illuminate\Support\Facades\DB;
 use App\Teaching;
 use App\Classroom;
-use App\View_weekly_lesson;
+use App\ViewWeeklyLesson;
 use Carbon\Carbon;
 
-class Special_eventObserver
+class SpecialEventObserver
 {
     /**
-     * Handle the special_event "created" event.
+     * Handle the SpecialEvent "created" event.
      *
-     * @param  \App\Special_event  $specialEvent
+     * @param  \App\SpecialEvent  $specialEvent
      * @return void
      */
-    public function created(Special_event $specialEvent)
+    public function created(SpecialEvent $specialEvent)
     {
         $day = Carbon::today()->dayOfWeek;
         $date = Carbon::today()->addDays( ( 7 - $day ) );
@@ -40,24 +40,24 @@ class Special_eventObserver
     }
 
     /**
-     * Handle the special_event "updated" event.
+     * Handle the SpecialEvent "updated" event.
      *
-     * @param  \App\Special_event  $specialEvent
+     * @param  \App\SpecialEvent  $specialEvent
      * @return void
      */
-    public function updated(Special_event $specialEvent)
+    public function updated(SpecialEvent $specialEvent)
     {
-        Special_eventObserver::deleted($specialEvent);
-        Special_eventObserver::created($specialEvent); // i am the best programmer in the world
+        SpecialEventObserver::deleted($specialEvent);
+        SpecialEventObserver::created($specialEvent); // i am the best programmer in the world
     }
 
     /**
-     * Handle the special_event "deleted" event.
+     * Handle the SpecialEvent "deleted" event.
      *
-     * @param  \App\Special_event  $specialEvent
+     * @param  \App\SpecialEvent  $specialEvent
      * @return void
      */
-    public function deleted(Special_event $specialEvent)
+    public function deleted(SpecialEvent $specialEvent)
     {
         $lesson = DB::table('view_weekly_lessons')
         ->where('view_weekly_lessons.lesson_id', '=', $specialEvent->id )

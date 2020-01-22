@@ -3,7 +3,7 @@
 namespace App\Console;
 
 use App;
-use App\View_weekly_lesson;
+use App\ViewWeeklyLesson;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call( 
             function () {
-                View_weekly_lesson::truncate();
+                ViewWeeklyLesson::truncate();
 
                 // inserting regular lessons
                 $lessons = DB::table('lessons')

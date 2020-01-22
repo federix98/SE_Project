@@ -2,22 +2,22 @@
 
 namespace App\Observers;
 
-use App\Canceled_lesson;
+use App\CanceledLesson;
 use Illuminate\Support\Facades\DB;
 use App\Teaching;
 use App\Classroom;
-use App\View_weekly_lesson;
+use App\ViewWeeklyLesson;
 use Carbon\Carbon;
 
-class Canceled_lessonObserver
+class CanceledLessonObserver
 {
     /**
-     * Handle the canceled_lesson "created" event.
+     * Handle the CanceledLesson "created" event.
      *
-     * @param  \App\Canceled_lesson  $canceledLesson
+     * @param  \App\CanceledLesson  $canceledLesson
      * @return void
      */
-    public function created(Canceled_lesson $canceledLesson)
+    public function created(CanceledLesson $canceledLesson)
     {
         $day = Carbon::today()->dayOfWeek;
         $date = Carbon::today()->addDays( ( 7 - $day ) );
@@ -32,24 +32,24 @@ class Canceled_lessonObserver
     }
 
     /**
-     * Handle the canceled_lesson "updated" event.
+     * Handle the CanceledLesson "updated" event.
      *
-     * @param  \App\Canceled_lesson  $canceledLesson
+     * @param  \App\CanceledLesson  $canceledLesson
      * @return void
      */
-    public function updated(Canceled_lesson $canceledLesson)
+    public function updated(CanceledLesson $canceledLesson)
     {
-        Canceled_lessonObserver::deleted($canceledLesson);
-        Canceled_lessonObserver::created($canceledLesson); // i am the best programmer in the world
+        CanceledLessonObserver::deleted($canceledLesson);
+        CanceledLessonObserver::created($canceledLesson); // i am the best programmer in the world
     }
 
     /**
-     * Handle the canceled_lesson "deleted" event.
+     * Handle the CanceledLesson "deleted" event.
      *
-     * @param  \App\Canceled_lesson  $canceledLesson
+     * @param  \App\CanceledLesson  $canceledLesson
      * @return void
      */
-    public function deleted(Canceled_lesson $canceledLesson)
+    public function deleted(CanceledLesson $canceledLesson)
     {
         $day = Carbon::today()->dayOfWeek;
         $date = Carbon::today()->addDays( ( 7 - $day ) );

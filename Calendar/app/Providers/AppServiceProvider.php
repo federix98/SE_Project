@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Providers;
-use App\Canceled_lesson;
-use App\Observers\Canceled_lessonObserver;
-use App\Extra_lesson;
-use App\Observers\Extra_lessonObserver;
+use App\CanceledLesson;
+use App\Observers\CanceledLessonObserver;
+use App\ExtraLesson;
+use App\Observers\ExtraLessonObserver;
 use App\Lesson;
 use App\Observers\LessonObserver;
-use App\Special_event;
-use App\Observers\Special_eventObserver;
+use App\SpecialEvent;
+use App\Observers\SpecialEventObserver;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -31,9 +31,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Canceled_lesson::observe(Canceled_lessonObserver::class);
-        Extra_lesson::observe(Extra_lessonObserver::class);
+        CanceledLesson::observe(CanceledLessonObserver::class);
+        ExtraLesson::observe(ExtraLessonObserver::class);
         Lesson::observe(LessonObserver::class);
-        Special_event::observe(Special_eventObserver::class);
+        SpecialEvent::observe(SpecialEventObserver::class);
     }
 }

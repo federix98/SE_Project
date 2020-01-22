@@ -2,23 +2,23 @@
 
 namespace App\Observers;
 
-use App\Extra_lesson;
+use App\ExtraLesson;
 use Illuminate\Support\Facades\DB;
 use App\Teaching;
 use App\Classroom;
-use App\View_weekly_lesson;
+use App\ViewWeeklyLesson;
 use Carbon\Carbon;
 
 
-class Extra_lessonObserver
+class ExtraLessonObserver
 {
     /**
-     * Handle the extra_lesson "created" event.
+     * Handle the ExtraLesson "created" event.
      *
-     * @param  \App\Extra_lesson  $extraLesson
+     * @param  \App\ExtraLesson  $extraLesson
      * @return void
      */
-    public function created(Extra_lesson $extraLesson)
+    public function created(ExtraLesson $extraLesson)
     {
         $day = Carbon::today()->dayOfWeek;
         $date = Carbon::today()->addDays( ( 7 - $day ) );
@@ -44,24 +44,24 @@ class Extra_lessonObserver
     }
 
     /**
-     * Handle the extra_lesson "updated" event.
+     * Handle the ExtraLesson "updated" event.
      *
-     * @param  \App\Extra_lesson  $extraLesson
+     * @param  \App\ExtraLesson  $extraLesson
      * @return void
      */
-    public function updated(Extra_lesson $extraLesson)
+    public function updated(ExtraLesson $extraLesson)
     {
-        Extra_lessonObserver::deleted($extraLesson);
-        Extra_lessonObserver::created($extraLesson); // i am the best programmer in the world
+        ExtraLessonObserver::deleted($extraLesson);
+        ExtraLessonObserver::created($extraLesson); // i am the best programmer in the world
     }
 
     /**
-     * Handle the extra_lesson "deleted" event.
+     * Handle the ExtraLesson "deleted" event.
      *
-     * @param  \App\Extra_lesson  $extraLesson
+     * @param  \App\ExtraLesson  $extraLesson
      * @return void
      */
-    public function deleted(Extra_lesson $extraLesson)
+    public function deleted(ExtraLesson $extraLesson)
     {
         $lesson = DB::table('view_weekly_lessons')
         ->where('view_weekly_lessons.lesson_id', '=', $extraLesson->id )
