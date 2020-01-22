@@ -6,7 +6,7 @@ use App\Http\Resources\Teaching as TeachingResource;
 use App\Http\Resources\Professor as ProfessorResource;
 use App\Http\Resources\Lesson as LessonResource;
 use App\Teaching;
-use App\professor;
+use App\Professor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
