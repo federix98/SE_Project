@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Teaching as TeachingResource;
 use App\Http\Resources\Professor as ProfessorResource;
 use App\Http\Resources\Lesson as LessonResource;
+use App\Lesson;
 use App\Teaching;
 use App\Professor;
 use Illuminate\Http\Request;
@@ -40,29 +41,29 @@ class TeachingController extends Controller
      */
     public function store(Request $request)
     {
-        $teaching = teaching::create($request->all());
+        $Teaching = Teaching::create($request->all());
 
-        return response()->json($teaching, 201);
+        return response()->json($Teaching, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\teaching  $teaching
+     * @param  \App\Teaching  $Teaching
      * @return \Illuminate\Http\Response
      */
-    public function show(teaching $teaching)
+    public function show(Teaching $Teaching)
     {
-        return new TeachingResource($teaching);
+        return new TeachingResource($Teaching);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\teaching  $teaching
+     * @param  \App\Teaching  $Teaching
      * @return \Illuminate\Http\Response
      */
-    public function edit(teaching $teaching)
+    public function edit(Teaching $Teaching)
     {
         //
     }
@@ -71,23 +72,23 @@ class TeachingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\teaching  $teaching
+     * @param  \App\Teaching  $Teaching
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, teaching $teaching)
+    public function update(Request $request, Teaching $Teaching)
     {
-        $teaching->update($request->all());
+        $Teaching->update($request->all());
 
-        return response()->json($teaching, 200);
+        return response()->json($Teaching, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\teaching  $teaching
+     * @param  \App\Teaching  $Teaching
      * @return \Illuminate\Http\Response
      */
-    public function destroy(teaching $teaching)
+    public function destroy(Teaching $Teaching)
     {
         $degree->delete();
 
@@ -95,63 +96,63 @@ class TeachingController extends Controller
     }
 
     /**
-     * Display a listing of professors by teaching
+     * Display a listing of professors by Teaching
      *
-     * @param  \App\teaching  $professor
+     * @param  \App\Teaching  $professor
      * @return \Illuminate\Http\Response
      */
-    public function getProfessors(teaching $teaching)
+    public function getProfessors(Teaching $Teaching)
     {
-        $teachingObj = teaching::find($teaching->id);
-        return ProfessorResource::collection($teachingObj->professors);
+        $TeachingObj = Teaching::find($Teaching->id);
+        return ProfessorResource::collection($TeachingObj->professors);
     }
 
     /**
-     * Store professor in teaching
+     * Store professor in Teaching
      *
-     * @param  \App\teaching  $teaching
+     * @param  \App\Teaching  $Teaching
      * @return \Illuminate\Http\Response
      */
-    public function storeProfessor(Request $request, teaching $teaching)
+    public function storeProfessor(Request $request, Teaching $Teaching)
     {
         $professor = professor::find($request->id);
         if(is_null($professor)) {
             return response()->json("Professore non esistente", 404);
         }
 
-        $teaching = teaching::find($teaching->id);
-        $teaching->professors()->attach($professor->id);
+        $Teaching = Teaching::find($Teaching->id);
+        $Teaching->professors()->attach($professor->id);
         
-        return response()->json(new TeachingResource($teaching), 201);
+        return response()->json(new TeachingResource($Teaching), 201);
     }
 
     /**
-     * Destroy professor in teaching
+     * Destroy professor in Teaching
      *
      * @param  \App\professor  $professor
-     * @param  \App\teaching  $teaching
+     * @param  \App\Teaching  $Teaching
      * @return \Illuminate\Http\Response
      */
-    public function destroyProfessor(Request $request, teaching $teaching, professor $professor)
+    public function destroyProfessor(Request $request, Teaching $Teaching, professor $professor)
     {
         $professor = professor::find($professor->id);
-        $teaching = teaching::find($teaching->id);
+        $Teaching = Teaching::find($Teaching->id);
 
         if(is_null($professor)) {
             return response()->json("Professore non esistente", 404);
         }
 
-        if(is_null($teaching->professors()->find($professor->id))) {
+        if(is_null($Teaching->professors()->find($professor->id))) {
             return response()->json("Professore non esistente sull'insegnamento", 404);
         }
 
-        $teaching->professors()->detach($professor->id);
+        $Teaching->professors()->detach($professor->id);
         
-        return response()->json(new TeachingResource($teaching), 200);
+        return response()->json(new TeachingResource($Teaching), 200);
     }
     
     /**
-     * Search teaching
+     * Search Teaching
      *
      * @return \Illuminate\Http\Response
      */
@@ -161,14 +162,14 @@ class TeachingController extends Controller
     }
 
     /**
-     * Display a listing of professors by teaching
+     * Display a listing of professors by Teaching
      *
-     * @param  \App\teaching  $teaching
+     * @param  \App\Teaching  $Teaching
      * @return \Illuminate\Http\Response
      */
-    public function getLessons(teaching $teaching)
+    public function getLessons(Teaching $Teaching)
     {
-        $teachingObj = teaching::find($teaching->id);
-        return LessonResource::collection($teachingObj->lessons);
+        $TeachingObj = Teaching::find($Teaching->id);
+        return LessonResource::collection($TeachingObj->lessons);
     }
 }

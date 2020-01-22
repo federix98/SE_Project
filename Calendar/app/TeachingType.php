@@ -10,6 +10,6 @@ class TeachingType extends Model
 
     public function degreeTeachings()
     {
-        return $this->hasMany('App\Degree_teaching');
+        return $this->hasMany('App\DegreeTeaching');
     }
 }

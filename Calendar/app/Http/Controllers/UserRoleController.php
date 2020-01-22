@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\User_role as User_roleResource;
-use App\User_role;
+use App\Http\Resources\UserRole as UserRoleResource;
+use App\UserRole;
 use Illuminate\Http\Request;
 
 class UserRoleController extends Controller
@@ -15,7 +15,7 @@ class UserRoleController extends Controller
      */
     public function index()
     {
-        return User_roleResource::collection(User_role::paginate(15));
+        return UserRoleResource::collection(UserRole::paginate(15));
     }
 
     /**
@@ -42,10 +42,10 @@ class UserRoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\user_role  $user_role
+     * @param  \App\UserRole  $UserRole
      * @return \Illuminate\Http\Response
      */
-    public function show(user_role $user_role)
+    public function show(UserRole $UserRole)
     {
         //
     }
@@ -53,10 +53,10 @@ class UserRoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\user_role  $user_role
+     * @param  \App\UserRole  $UserRole
      * @return \Illuminate\Http\Response
      */
-    public function edit(user_role $user_role)
+    public function edit(UserRole $UserRole)
     {
         //
     }
@@ -65,10 +65,10 @@ class UserRoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\user_role  $user_role
+     * @param  \App\UserRole  $UserRole
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, user_role $user_role)
+    public function update(Request $request, UserRole $UserRole)
     {
         //
     }
@@ -76,10 +76,10 @@ class UserRoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\user_role  $user_role
+     * @param  \App\UserRole  $UserRole
      * @return \Illuminate\Http\Response
      */
-    public function destroy(user_role $user_role)
+    public function destroy(UserRole $UserRole)
     {
         //
     }

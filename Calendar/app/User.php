@@ -38,7 +38,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo('App\User_role','user_role_id');
+        return $this->belongsTo('App\UserRole','user_role_id');
     }
 
     public function degree()

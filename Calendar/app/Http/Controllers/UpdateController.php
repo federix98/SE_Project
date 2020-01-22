@@ -44,10 +44,10 @@ class UpdateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\update  $update
+     * @param  \App\Update  $Update
      * @return \Illuminate\Http\Response
      */
-    public function show(update $update)
+    public function show(Update $Update)
     {
         //
     }
@@ -55,10 +55,10 @@ class UpdateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\update  $update
+     * @param  \App\Update  $Update
      * @return \Illuminate\Http\Response
      */
-    public function edit(update $update)
+    public function edit(Update $Update)
     {
         //
     }
@@ -67,10 +67,10 @@ class UpdateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\update  $update
+     * @param  \App\Update  $Update
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, update $update)
+    public function Update(Request $request, Update $Update)
     {
         //
     }
@@ -78,10 +78,10 @@ class UpdateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\update  $update
+     * @param  \App\Update  $Update
      * @return \Illuminate\Http\Response
      */
-    public function destroy(update $update)
+    public function destroy(Update $Update)
     {
         //
     }
@@ -96,11 +96,11 @@ class UpdateController extends Controller
         if( $user->personal_calendar == 0 ) $teaching_ids = $user->degree->teachings->pluck('id');
         else $teaching_ids = $user->teachings->pluck('id');
         
-        $updates = update::whereHas('teaching', function($query) use($teaching_ids) {
+        $Updates = Update::whereHas('teaching', function($query) use($teaching_ids) {
             $query->whereIn('teachings.id', $teaching_ids)->whereDate('updates.created_at', '>',  auth()->user()->LAU);
         })->get();
 
-        if ($updates->isEmpty()) return false;
+        if ($Updates->isEmpty()) return false;
         return true;
     }
 }

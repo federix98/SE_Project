@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Teaching_type as Teaching_typeResource;
-use App\Teaching_type;
+use App\Http\Resources\TeachingType as TeachingTypeResource;
+use App\TeachingType;
 use Illuminate\Http\Request;
 
 class TeachingTypeController extends Controller
@@ -15,7 +15,7 @@ class TeachingTypeController extends Controller
      */
     public function index()
     {
-        return Teaching_typeResource::collection(Teaching_type::paginate(15));
+        return TeachingTypeResource::collection(TeachingType::paginate(15));
     }
 
     /**
@@ -42,10 +42,10 @@ class TeachingTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\teaching_type  $teaching_type
+     * @param  \App\TeachingType  $TeachingType
      * @return \Illuminate\Http\Response
      */
-    public function show(teaching_type $teaching_type)
+    public function show(TeachingType $TeachingType)
     {
         //
     }
@@ -53,10 +53,10 @@ class TeachingTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\teaching_type  $teaching_type
+     * @param  \App\TeachingType  $TeachingType
      * @return \Illuminate\Http\Response
      */
-    public function edit(teaching_type $teaching_type)
+    public function edit(TeachingType $TeachingType)
     {
         //
     }
@@ -65,10 +65,10 @@ class TeachingTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\teaching_type  $teaching_type
+     * @param  \App\TeachingType  $TeachingType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, teaching_type $teaching_type)
+    public function update(Request $request, TeachingType $TeachingType)
     {
         //
     }
@@ -76,10 +76,10 @@ class TeachingTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\teaching_type  $teaching_type
+     * @param  \App\TeachingType  $TeachingType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(teaching_type $teaching_type)
+    public function destroy(TeachingType $TeachingType)
     {
         //
     }

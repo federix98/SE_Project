@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Extra_lesson as Extra_lessonResource;
-use App\Extra_lesson;
+use App\Lesson;
+use App\Http\Resources\ExtraLesson as ExtraLessonResource;
+use App\ExtraLesson;
 use Illuminate\Http\Request;
 
 class ExtraLessonController extends Controller
@@ -15,7 +16,7 @@ class ExtraLessonController extends Controller
      */
     public function index()
     {
-        return Extra_lessonResource::collection(Extra_lesson::paginate(15));
+        return ExtraLessonResource::collection(ExtraLesson::paginate(15));
     }
 
     /**
@@ -36,7 +37,7 @@ class ExtraLessonController extends Controller
      */
     public function store(Request $request)
     {
-        $lesson = lesson::create($request->all());
+        $lesson = Lesson::create($request->all());
 
         return response()->json($lesson, 201);
     }
@@ -44,21 +45,21 @@ class ExtraLessonController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\extra_lesson  $extra_lesson
+     * @param  \App\ExtraLesson  $ExtraLesson
      * @return \Illuminate\Http\Response
      */
-    public function show(extra_lesson $extra_lesson)
+    public function show(ExtraLesson $ExtraLesson)
     {
-        return new Extra_lessonResource($extra_lesson);
+        return new ExtraLessonResource($ExtraLesson);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\extra_lesson  $extra_lesson
+     * @param  \App\ExtraLesson  $ExtraLesson
      * @return \Illuminate\Http\Response
      */
-    public function edit(extra_lesson $extra_lesson)
+    public function edit(ExtraLesson $ExtraLesson)
     {
         //
     }
@@ -67,24 +68,24 @@ class ExtraLessonController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\extra_lesson  $extra_lesson
+     * @param  \App\ExtraLesson  $ExtraLesson
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, extra_lesson $extra_lesson)
+    public function update(Request $request, ExtraLesson $ExtraLesson)
     {
-        $extra_lesson->update($request->all());
-        return response()->json($extra_lesson, 200);
+        $ExtraLesson->update($request->all());
+        return response()->json($ExtraLesson, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\extra_lesson  $extra_lesson
+     * @param  \App\ExtraLesson  $ExtraLesson
      * @return \Illuminate\Http\Response
      */
-    public function destroy(extra_lesson $extra_lesson)
+    public function destroy(ExtraLesson $ExtraLesson)
     {
-        $extra_lesson->delete();
+        $ExtraLesson->delete();
         return response()->json(null, 204);
     }
 }

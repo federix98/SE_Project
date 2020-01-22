@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Degree_group as Degree_groupResource;
-use App\Degree_group;
+use App\Http\Resources\DegreeGroup as DegreeGroupResource;
+use App\DegreeGroup;
 use Illuminate\Http\Request;
 
 class DegreeGroupController extends Controller
@@ -15,7 +15,7 @@ class DegreeGroupController extends Controller
      */
     public function index()
     {
-        return Degree_groupResource::collection(Degree_group::paginate(15));
+        return DegreeGroupResource::collection(DegreeGroup::paginate(15));
     }
 
     /**
@@ -36,29 +36,29 @@ class DegreeGroupController extends Controller
      */
     public function store(Request $request)
     {
-        $degree_group = degree_group::create($request->all());
+        $DegreeGroup = DegreeGroup::create($request->all());
 
-        return response()->json($degree_group, 201);
+        return response()->json($DegreeGroup, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\degree_group  $degree_group
+     * @param  \App\DegreeGroup  $DegreeGroup
      * @return \Illuminate\Http\Response
      */
-    public function show(degree_group $degree_group)
+    public function show(DegreeGroup $DegreeGroup)
     {
-        return $degree_group;
+        return $DegreeGroup;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\degree_group  $degree_group
+     * @param  \App\DegreeGroup  $DegreeGroup
      * @return \Illuminate\Http\Response
      */
-    public function edit(degree_group $degree_group)
+    public function edit(DegreeGroup $DegreeGroup)
     {
         //
     }
@@ -67,25 +67,25 @@ class DegreeGroupController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\degree_group  $degree_group
+     * @param  \App\DegreeGroup  $DegreeGroup
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, degree_group $degree_group)
+    public function update(Request $request, DegreeGroup $DegreeGroup)
     {
-        $degree_group->update($request->all());
+        $DegreeGroup->update($request->all());
 
-        return response()->json($degree_group, 200);
+        return response()->json($DegreeGroup, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\degree_group  $degree_group
+     * @param  \App\DegreeGroup  $DegreeGroup
      * @return \Illuminate\Http\Response
      */
-    public function destroy(degree_group $degree_group)
+    public function destroy(DegreeGroup $DegreeGroup)
     {
-        $degree_group->delete();
+        $DegreeGroup->delete();
 
         return response()->json(null, 204);
     }

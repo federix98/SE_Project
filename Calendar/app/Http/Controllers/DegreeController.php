@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Degree as DegreeResource;
-use App\Http\Resources\View_weekly_lesson as CalendarResource;
+use App\Http\Resources\ViewWeeklyLesson as CalendarResource;
 use App\Http\Resources\Professor as ProfessorResource;
 use app\Http\Resources\Teaching as TeachingResource;
 use App\Degree;
 use Carbon\Carbon;
-use App\view_weekly_lesson;
+use App\ViewWeeklyLesson;
 use App\Professor;
 use Illuminate\Http\Request;
 
@@ -43,29 +43,29 @@ class DegreeController extends Controller
     public function store(Request $request)
     {
         //
-        $degree = degree::create($request->all());
+        $Degree = Degree::create($request->all());
 
-        return response()->json($degree, 201);
+        return response()->json($Degree, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\degree  $degree
+     * @param  \App\Degree  $Degree
      * @return \Illuminate\Http\Response
      */
-    public function show(degree $degree)
+    public function show(Degree $Degree)
     {
-        return new DegreeResource($degree);
+        return new DegreeResource($Degree);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\degree  $degree
+     * @param  \App\Degree  $Degree
      * @return \Illuminate\Http\Response
      */
-    public function edit(degree $degree)
+    public function edit(Degree $Degree)
     {
         //
     }
@@ -74,52 +74,52 @@ class DegreeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\degree  $degree
+     * @param  \App\Degree  $Degree
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, degree $degree)
+    public function update(Request $request, Degree $Degree)
     {
-        $degree->update($request->all());
+        $Degree->update($request->all());
 
-        return response()->json($degree, 200);
+        return response()->json($Degree, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\degree  $degree
+     * @param  \App\Degree  $Degree
      * @return \Illuminate\Http\Response
      */
-    public function destroy(degree $degree)
+    public function destroy(Degree $Degree)
     {
-        $degree->delete();
+        $Degree->delete();
 
         return response()->json(null, 204);
     }
 
     /**
-     * Get Calendar from degree
+     * Get Calendar from Degree
      *
-     * @param  \App\degree  $degree
+     * @param  \App\Degree  $Degree
      * @return \Illuminate\Http\Response
      */
-    public function getCalendar(degree $degree) 
+    public function getCalendar(Degree $Degree) 
     {
-        $teaching_ids = $degree->teachings->pluck('id');   
-        return CalendarResource::collection(view_weekly_lesson::whereIn('teaching_id', $teaching_ids)->get());
+        $teaching_ids = $Degree->teachings->pluck('id');   
+        return CalendarResource::collection(ViewWeeklyLesson::whereIn('teaching_id', $teaching_ids)->get());
     }
 
 
     /**
-     * Get Current Lessons from degree
+     * Get Current Lessons from Degree
      *
-     * @param  \App\degree  $degree
+     * @param  \App\Degree  $Degree
      * @return \Illuminate\Http\Response
      */
-    public function getCurrentLessons(degree $degree) {
+    public function getCurrentLessons(Degree $Degree) {
         
-        $teaching_ids = $degree->teachings->pluck('id');
-        $my_weekly_lessons = view_weekly_lesson::whereIn('teaching_id', $teaching_ids);
+        $teaching_ids = $Degree->teachings->pluck('id');
+        $my_weekly_lessons = ViewWeeklyLesson::whereIn('teaching_id', $teaching_ids);
         
         $actual_ts = Carbon::now()->timestamp;
         $today_ts = Carbon::today()->timestamp;
@@ -142,12 +142,12 @@ class DegreeController extends Controller
     /**
      * Get Professors from Degree
      *
-     * @param  \App\degree  $degree
+     * @param  \App\Degree  $Degree
      * @return \Illuminate\Http\Response
      */
-    public function getProfessors(degree $degree)
+    public function getProfessors(Degree $Degree)
     {
-        $teaching_ids = $degree->teachings->pluck('id');
+        $teaching_ids = $Degree->teachings->pluck('id');
         
         $my_professors = professor::whereHas('teachings', function($query) use($teaching_ids) {
             $query->whereIn('teachings.id', $teaching_ids);
@@ -159,11 +159,11 @@ class DegreeController extends Controller
     /**
      * Get Teachings from Degree
      *
-     * @param  \App\degree  $degree
+     * @param  \App\Degree  $Degree
      * @return \Illuminate\Http\Response
      */
-    public function getTeachings(degree $degree)
+    public function getTeachings(Degree $Degree)
     {
-        return TeachingResource::collection($degree->teachings);
+        return TeachingResource::collection($Degree->teachings);
     }
 }

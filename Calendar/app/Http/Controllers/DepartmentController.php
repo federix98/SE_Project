@@ -36,29 +36,29 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $department = department::create($request->all());
+        $Department = Department::create($request->all());
 
-        return response()->json($department, 201);
+        return response()->json($Department, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\department  $department
+     * @param  \App\Department  $Department
      * @return \Illuminate\Http\Response
      */
-    public function show(department $department)
+    public function show(Department $Department)
     {
-        return $department;
+        return $Department;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\department  $department
+     * @param  \App\Department  $Department
      * @return \Illuminate\Http\Response
      */
-    public function edit(department $department)
+    public function edit(Department $Department)
     {
         //
     }
@@ -67,25 +67,25 @@ class DepartmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\department  $department
+     * @param  \App\Department  $Department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, department $department)
+    public function update(Request $request, Department $Department)
     {
-        $department->update($request->all());
+        $Department->update($request->all());
 
-        return response()->json($department, 200);
+        return response()->json($Department, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\department  $department
+     * @param  \App\Department  $Department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(department $department)
+    public function destroy(Department $Department)
     {
-        $department->delete();
+        $Department->delete();
 
         return response()->json(null, 204);
     }

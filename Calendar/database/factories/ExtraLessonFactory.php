@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Extra_lesson::class, function (Faker $faker) {
+$factory->define(App\ExtraLesson::class, function (Faker $faker) {
     return [
         'classroom_id' => $faker->numberBetween($min = 1, $max = 100),
         'teaching_id' => $faker->numberBetween($min = 1, $max = 800),

@@ -17,7 +17,7 @@ class Teaching extends Model
 
     public function extraLessons()
     {
-        return $this->hasMany('App\Extra_lesson');
+        return $this->hasMany('App\ExtraLesson');
     }
 
     public function lessons()
@@ -37,7 +37,7 @@ class Teaching extends Model
 
     public function degrees()
     {
-        return $this->belongsToMany('App\Degree')->using('App\Degree_teaching')
+        return $this->belongsToMany('App\Degree')->using('App\DegreeTeaching')
         ->withPivot([
             'teaching_type_id'
         ]);
@@ -45,7 +45,7 @@ class Teaching extends Model
 
     public function getType( $degree_id ) // torna il tipo dellla lezione
     {
-        return Degree_teaching::where('degree_id', '=', $degree_id )->where('teaching_id','=', $this->id )
+        return DegreeTeaching::where('degree_id', '=', $degree_id )->where('teaching_id','=', $this->id )
         ->get()->first()['teaching_type_id'];  
     }
 }

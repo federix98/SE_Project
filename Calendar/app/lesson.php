@@ -16,7 +16,7 @@ class Lesson extends Model
 
     public function canceledLesson()
     {
-        return $this->hasOne('App\Canceled_lesson');
+        return $this->hasOne('App\CanceledLesson');
     }
 
     public function classroom()

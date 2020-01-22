@@ -10,7 +10,7 @@ class Degree extends Model
     protected $visible = ['id', 'degree_group_id', 'name', 'year', 'SSD'];
 
     public function degreeGroup() {
-        return $this->belongsTo('App\Degree_group');
+        return $this->belongsTo('App\DegreeGroup');
     }
 
     public function users() {
@@ -19,12 +19,12 @@ class Degree extends Model
 
     public function specialEvents()
     {
-        return $this->belongsToMany('App\Special_event');
+        return $this->belongsToMany('App\SpecialEvent');
     }
 
     public function teachings()
     {
-        return $this->belongsToMany('App\Teaching')->using('App\Degree_teaching')
+        return $this->belongsToMany('App\Teaching')->using('App\DegreeTeaching')
         ->withPivot([
             'teaching_type_id'
         ]);

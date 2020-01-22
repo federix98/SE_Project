@@ -16,6 +16,6 @@ class Department extends Model
 
     public function degreeGroups()
     {
-        return $this->hasMany('App\Degree_group');
+        return $this->hasMany('App\DegreeGroup');
     }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\Http\Resources\Lesson as LessonResource;
-use App\Http\Resources\Canceled_Lesson as CanceledLessonResource;
+use App\Http\Resources\CanceledLesson as CanceledLessonResource;
 use App\Lesson;
-use App\canceled_lesson;
+use App\CanceledLesson;
 use App\Classroom;
 use App\Update;
 use Illuminate\Http\Request;
@@ -41,28 +41,28 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        $lesson = lesson::create($request->all());
-        return response()->json($lesson, 201);
+        $Lesson = Lesson::create($request->all());
+        return response()->json($Lesson, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\lesson  $lesson
+     * @param  \App\Lesson  $Lesson
      * @return \Illuminate\Http\Response
      */
-    public function show(lesson $lesson)
+    public function show(Lesson $Lesson)
     {
-        return new LessonResource($lesson);
+        return new LessonResource($Lesson);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\lesson  $lesson
+     * @param  \App\Lesson  $Lesson
      * @return \Illuminate\Http\Response
      */
-    public function edit(lesson $lesson)
+    public function edit(Lesson $Lesson)
     {
         //
     }
@@ -71,24 +71,24 @@ class LessonController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\lesson  $lesson
+     * @param  \App\Lesson  $Lesson
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, lesson $lesson)
+    public function update(Request $request, Lesson $Lesson)
     {
-        $lesson->update($request->all());
-        return response()->json($lesson, 200);
+        $Lesson->update($request->all());
+        return response()->json($Lesson, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\lesson  $lesson
+     * @param  \App\Lesson  $Lesson
      * @return \Illuminate\Http\Response
      */
-    public function destroy(lesson $lesson)
+    public function destroy(Lesson $Lesson)
     {
-        $lesson->delete();
+        $Lesson->delete();
         return response()->json(null, 204);
     }
 
@@ -96,10 +96,10 @@ class LessonController extends Controller
      * Annullamento di una lezione
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\lesson  $lesson
+     * @param  \App\Lesson  $Lesson
      * @return \Illuminate\Http\Response
      */
-    public function cancel(Request $request, lesson $lesson)
+    public function cancel(Request $request, Lesson $Lesson)
     {
         // NOTA : Per evitare redirect alla HomePage settare nella richiesta accept:application/json
 
@@ -107,49 +107,49 @@ class LessonController extends Controller
             'date_lesson' => 'required|date_format:Y-m-d',
         ]);
 
-        if(canceled_lesson::where('lesson_id', '=', $lesson->id)->count() > 0){
+        if(CanceledLesson::where('lesson_id', '=', $Lesson->id)->count() > 0){
             return response()->json('Lezione gia annullata in precendenza', 409);
         }
 
         $request->merge([
-            'lesson_id' => $lesson->id,
+            'lesson_id' => $Lesson->id,
         ]);
-        $canceled_lesson = canceled_lesson::create($request->all());
-        return response()->json($canceled_lesson, 201);
+        $CanceledLesson = CanceledLesson::create($request->all());
+        return response()->json($CanceledLesson, 201);
     }
 
     /**
      * Cambio aula
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\lesson  $lesson
-     * @param  \App\classroom  $classroom
+     * @param  \App\Lesson  $Lesson
+     * @param  \App\Classroom  $Classroom
      * @return \Illuminate\Http\Response
      */
-    public function changeClassroom(Request $request, lesson $lesson, classroom $classroom)
+    public function changeClassroom(Request $request, Lesson $Lesson, Classroom $Classroom)
     {
-        if(is_null($classroom)) {
+        if(is_null($Classroom)) {
             return response()->json("Aula non esistente nel sistema", 400);
         }
 
-        if(is_null($lesson)) {
+        if(is_null($Lesson)) {
             return response()->json("Lezione non esistente nel sistema", 400);
         }
 
-        $lesson->update([
-            'classroom_id' => $classroom->id,
+        $Lesson->update([
+            'classroom_id' => $Classroom->id,
         ]);
 
         // Creazione notifica
         /*
         $update = new Update;
-        $teaching_name = Teaching::find($lesson->teaching_id)->name;
+        $teaching_name = Teaching::find($Lesson->teaching_id)->name;
 
-        $update->teaching_id = $lesson->teaching_id;
+        $update->teaching_id = $Lesson->teaching_id;
         $update->title = "Cambio di aula - " . $teaching_name;
         $update->info = "La lezione di " . $teaching_name . " del giorno " . 
         */
-        return response()->json($lesson, 200);
+        return response()->json($Lesson, 200);
     }
 
 
@@ -157,12 +157,12 @@ class LessonController extends Controller
      * Cambio orario
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\lesson  $lesson
+     * @param  \App\Lesson  $Lesson
      * @return \Illuminate\Http\Response
      */
-    public function changeTime(Request $request, lesson $lesson)
+    public function changeTime(Request $request, Lesson $Lesson)
     {
-        if(is_null($lesson)) {
+        if(is_null($Lesson)) {
             return response()->json("Lezione non esistente nel sistema", 400);
         }
 
@@ -171,18 +171,18 @@ class LessonController extends Controller
             'duration' => 'required|numeric',
         ]);
 
-        $lesson->update([
+        $Lesson->update([
             'start_time' => $request->start_time,
             'duration' => $request->duration,
         ]);
 
-        return response()->json($lesson, 200);
+        return response()->json($Lesson, 200);
     }
 
     /**
      * Restituisce le lezioni annullate
      */
     public function getCanceledLessons(Request $request){
-        return CanceledLessonResource::collection(canceled_lesson::all());
+        return CanceledLessonResource::collection(CanceledLesson::all());
     }
 }

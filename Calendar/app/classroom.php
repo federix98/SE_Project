@@ -15,7 +15,7 @@ class Classroom extends Model
 
     public function extraLessons()
     {
-        return $this->hasMany('App\Extra_lesson');
+        return $this->hasMany('App\ExtraLesson');
     }
 
     public function lessons()
@@ -25,7 +25,7 @@ class Classroom extends Model
     
     public function specialEvents()
     {
-        return $this->hasMany('App\Special_event');
+        return $this->hasMany('App\SpecialEvent');
     }
 
 }

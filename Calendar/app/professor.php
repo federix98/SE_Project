@@ -10,7 +10,7 @@ class Professor extends Model
 
     public function role()
     {
-        return $this->belongsTo('App\Professor_role','professor_role_id');
+        return $this->belongsTo('App\ProfessorRole','professor_role_id');
     }
 
     public function department()

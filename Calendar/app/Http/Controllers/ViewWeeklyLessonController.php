@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\View_weekly_lesson as View_weekly_lessonResource;
-use App\View_weekly_lesson;
+use App\Http\Resources\ViewWeeklyLesson as View_weekly_lessonResource;
+use App\ViewWeeklyLesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Utility\StaticMethod\Retrievable;
@@ -17,7 +17,7 @@ class ViewWeeklyLessonController extends Controller
      */
     public function index()
     {
-        return View_weekly_lessonResource::collection(View_weekly_lesson::paginate(15));
+        return ViewWeeklyLessonResource::collection(ViewWeeklyLesson::paginate(15));
     }
 
     /**
@@ -44,10 +44,10 @@ class ViewWeeklyLessonController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\view_weekly_lesson  $view_weekly_lesson
+     * @param  \App\ViewWeeklyLesson  $ViewWeeklyLesson
      * @return \Illuminate\Http\Response
      */
-    public function show(view_weekly_lesson $view_weekly_lesson)
+    public function show(ViewWeeklyLesson $ViewWeeklyLesson)
     {
         //
     }
@@ -55,10 +55,10 @@ class ViewWeeklyLessonController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\view_weekly_lesson  $view_weekly_lesson
+     * @param  \App\ViewWeeklyLesson  $ViewWeeklyLesson
      * @return \Illuminate\Http\Response
      */
-    public function edit(view_weekly_lesson $view_weekly_lesson)
+    public function edit(ViewWeeklyLesson $ViewWeeklyLesson)
     {
         //
     }
@@ -67,10 +67,10 @@ class ViewWeeklyLessonController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\view_weekly_lesson  $view_weekly_lesson
+     * @param  \App\ViewWeeklyLesson  $ViewWeeklyLesson
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, view_weekly_lesson $view_weekly_lesson)
+    public function update(Request $request, ViewWeeklyLesson $ViewWeeklyLesson)
     {
         //
     }
@@ -78,10 +78,10 @@ class ViewWeeklyLessonController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\view_weekly_lesson  $view_weekly_lesson
+     * @param  \App\ViewWeeklyLesson  $ViewWeeklyLesson
      * @return \Illuminate\Http\Response
      */
-    public function destroy(view_weekly_lesson $view_weekly_lesson)
+    public function destroy(ViewWeeklyLesson $ViewWeeklyLesson)
     {
         //
     }

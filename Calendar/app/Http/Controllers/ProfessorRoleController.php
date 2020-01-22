@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Professor_role as Professor_roleResource;
-use App\Professor_role;
+use App\Http\Resources\ProfessorRole as ProfessorRoleResource;
+use App\ProfessorRole;
 use Illuminate\Http\Request;
 
 class ProfessorRoleController extends Controller
@@ -15,7 +15,7 @@ class ProfessorRoleController extends Controller
      */
     public function index()
     {
-        return Professor_roleResource::collection(Professor_role::paginate(15));
+        return ProfessorRoleResource::collection(ProfessorRole::paginate(15));
     }
 
     /**
@@ -42,10 +42,10 @@ class ProfessorRoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\professor_role  $professor_role
+     * @param  \App\ProfessorRole  $ProfessorRole
      * @return \Illuminate\Http\Response
      */
-    public function show(professor_role $professor_role)
+    public function show(ProfessorRole $ProfessorRole)
     {
         //
     }
@@ -53,10 +53,10 @@ class ProfessorRoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\professor_role  $professor_role
+     * @param  \App\ProfessorRole  $ProfessorRole
      * @return \Illuminate\Http\Response
      */
-    public function edit(professor_role $professor_role)
+    public function edit(ProfessorRole $ProfessorRole)
     {
         //
     }
@@ -65,10 +65,10 @@ class ProfessorRoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\professor_role  $professor_role
+     * @param  \App\ProfessorRole  $ProfessorRole
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, professor_role $professor_role)
+    public function update(Request $request, ProfessorRole $ProfessorRole)
     {
         //
     }
@@ -76,10 +76,10 @@ class ProfessorRoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\professor_role  $professor_role
+     * @param  \App\ProfessorRole  $ProfessorRole
      * @return \Illuminate\Http\Response
      */
-    public function destroy(professor_role $professor_role)
+    public function destroy(ProfessorRole $ProfessorRole)
     {
         //
     }

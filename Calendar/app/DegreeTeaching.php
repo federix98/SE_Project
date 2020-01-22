@@ -10,6 +10,6 @@ class DegreeTeaching extends Pivot
 
     public function type()
     {
-        return $this->belongsTo('App\Teaching_type','teaching_type_id');
+        return $this->belongsTo('App\TeachingType','teaching_type_id');
     }
 }

@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Canceled_lesson::class, function (Faker $faker) {
+$factory->define(App\CanceledLesson::class, function (Faker $faker) {
     return [
         'lesson_id' => $faker->numberBetween($min = 1, $max = 1600),
         'date_lesson' => $faker->date(),

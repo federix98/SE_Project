@@ -21,11 +21,11 @@ class PopulateSeeder extends Seeder
         factory('App\Update', 800)->create();
         factory('App\Lesson', 800)->create();
         factory('App\Lesson', 800)->create();
-        factory('App\Extra_lesson', 100)->create();
-        factory('App\Canceled_lesson', 200)->create();
-        factory('App\Special_event', 200)->create();
-        factory('App\Professor_teaching', 100)->create();
-        factory('App\Degree_teaching', 600)->create();
-        factory('App\degree_special_event', 25)->create();
+        factory('App\ExtraLesson', 100)->create();
+        factory('App\CanceledLesson', 200)->create();
+        factory('App\SpecialEvent', 200)->create();
+        factory('App\ProfessorTeaching', 100)->create();
+        factory('App\DegreeTeaching', 600)->create();
+        factory('App\degreeSpecialEvent', 25)->create();
     }
 }

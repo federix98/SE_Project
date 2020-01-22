@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Canceled_lesson as Canceled_lessonResource;
-use App\Canceled_lesson;
+use App\Http\Resources\CanceledLesson as CanceledLessonResource;
+use App\CanceledLesson;
 use Illuminate\Http\Request;
 
 class CanceledLessonController extends Controller
@@ -15,7 +15,7 @@ class CanceledLessonController extends Controller
      */
     public function index()
     {
-        return Canceled_lessonResource::collection(Canceled_lesson::paginate(15));
+        return CanceledLessonResource::collection(CanceledLesson::paginate(15));
     }
 
     /**
@@ -42,10 +42,10 @@ class CanceledLessonController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\canceled_lesson  $canceled_lesson
+     * @param  \App\CanceledLesson  $CanceledLesson
      * @return \Illuminate\Http\Response
      */
-    public function show(canceled_lesson $canceled_lesson)
+    public function show(CanceledLesson $CanceledLesson)
     {
         //
     }
@@ -53,10 +53,10 @@ class CanceledLessonController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\canceled_lesson  $canceled_lesson
+     * @param  \App\CanceledLesson  $CanceledLesson
      * @return \Illuminate\Http\Response
      */
-    public function edit(canceled_lesson $canceled_lesson)
+    public function edit(CanceledLesson $CanceledLesson)
     {
         //
     }
@@ -65,10 +65,10 @@ class CanceledLessonController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\canceled_lesson  $canceled_lesson
+     * @param  \App\CanceledLesson  $CanceledLesson
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, canceled_lesson $canceled_lesson)
+    public function update(Request $request, CanceledLesson $CanceledLesson)
     {
         //
     }
@@ -76,10 +76,10 @@ class CanceledLessonController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\canceled_lesson  $canceled_lesson
+     * @param  \App\CanceledLesson  $CanceledLesson
      * @return \Illuminate\Http\Response
      */
-    public function destroy(canceled_lesson $canceled_lesson)
+    public function destroy(CanceledLesson $CanceledLesson)
     {
         //
     }

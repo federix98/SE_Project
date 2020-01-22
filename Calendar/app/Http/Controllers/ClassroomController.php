@@ -42,10 +42,10 @@ class ClassroomController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\classroom  $classroom
+     * @param  \App\Classroom  $Classroom
      * @return \Illuminate\Http\Response
      */
-    public function show(classroom $classroom)
+    public function show(Classroom $Classroom)
     {
         //
     }
@@ -53,10 +53,10 @@ class ClassroomController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\classroom  $classroom
+     * @param  \App\Classroom  $Classroom
      * @return \Illuminate\Http\Response
      */
-    public function edit(classroom $classroom)
+    public function edit(Classroom $Classroom)
     {
         //
     }
@@ -65,10 +65,10 @@ class ClassroomController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\classroom  $classroom
+     * @param  \App\Classroom  $Classroom
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, classroom $classroom)
+    public function update(Request $request, Classroom $Classroom)
     {
         //
     }
@@ -76,10 +76,10 @@ class ClassroomController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\classroom  $classroom
+     * @param  \App\Classroom  $Classroom
      * @return \Illuminate\Http\Response
      */
-    public function destroy(classroom $classroom)
+    public function destroy(Classroom $Classroom)
     {
         //
     }

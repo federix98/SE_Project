@@ -46,7 +46,7 @@ class AuthController extends Controller
         // DA IMPLEMENTARE
     }
 
-  
+
     /**
      * Login user and create token
      *
