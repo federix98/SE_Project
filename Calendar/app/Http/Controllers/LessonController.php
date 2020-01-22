@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\Http\Resources\Lesson as LessonResource;
+use App\Http\Resources\Canceled_Lesson as CanceledLessonResource;
 use App\Lesson;
 use App\canceled_lesson;
 use App\Classroom;
@@ -176,5 +177,12 @@ class LessonController extends Controller
         ]);
 
         return response()->json($lesson, 200);
+    }
+
+    /**
+     * Restituisce le lezioni annullate
+     */
+    public function getCanceledLessons(Request $request){
+        return CanceledLessonResource::collection(canceled_lesson::all());
     }
 }

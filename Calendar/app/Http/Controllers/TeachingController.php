@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\Teaching as TeachingResource;
 use App\Http\Resources\Professor as ProfessorResource;
+use App\Http\Resources\Lesson as LessonResource;
 use App\Teaching;
 use App\professor;
 use Illuminate\Http\Request;
@@ -157,5 +158,17 @@ class TeachingController extends Controller
     public function search(Request $request)
     {
         // DA IMPLEMENTARE
+    }
+
+    /**
+     * Display a listing of professors by teaching
+     *
+     * @param  \App\teaching  $teaching
+     * @return \Illuminate\Http\Response
+     */
+    public function getLessons(teaching $teaching)
+    {
+        $teachingObj = teaching::find($teaching->id);
+        return LessonResource::collection($teachingObj->lessons);
     }
 }

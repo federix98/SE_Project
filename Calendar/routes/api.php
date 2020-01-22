@@ -88,6 +88,8 @@ Route::prefix('v1')->group(function () {
                 Route::get('teachings/{teaching}/professors', 'TeachingController@getProfessors');
                 Route::post('teachings/{teaching}/professors', 'TeachingController@storeProfessor');
                 Route::delete('teachings/{teaching}/professors/{professor}', 'TeachingController@destroyProfessor');
+                // Teaching Lessons
+                Route::get('teachings/{teaching}/lessons', 'TeachingController@getLessons');
     
                 // Professors CRUD Routes 
                 Route::get('professors', 'ProfessorController@index');
@@ -130,6 +132,7 @@ Route::prefix('v1')->group(function () {
                 Route::post('lessons/{lesson}/cancel', 'LessonController@cancel');
                 Route::patch('lessons/{lesson}/classroom/{classroom}', 'LessonController@changeClassroom');
                 Route::patch('lessons/{lesson}/time', 'LessonController@changeTime');
+                Route::get('canceled_lessons', 'LessonController@getCanceledLessons');
     
                 // Extra Lessons
                 Route::get('extra_lessons', 'ExtraLessonController@index');

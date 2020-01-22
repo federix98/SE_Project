@@ -18,3 +18,17 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/dash', function () {
+    return view('layouts.dashboard');
+});
+
+// ADMIN ROUTES
+
+Route::get('edit_lessons', function () {
+    return view('lessons');
+});
+
+Route::get('cancel_lessons', function () {
+    return view('cancel_lesson');
+});

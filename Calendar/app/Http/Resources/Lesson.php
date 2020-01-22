@@ -16,8 +16,9 @@ class Lesson extends JsonResource
     {
         return [
             'id' => $this->id,
-            'classroom_id' => $this->classroom_id,
-            'teaching_id' => $this->teaching_id,
+            //'classroom_id' => $this->classroom_id,
+            'classroom_name' => $this->classroom->name,
+            'teaching' => $this->teaching->name,
             'start_time' => $this->start_time,
             'duration' => $this->duration,
             'week_day' => $this->week_day,
