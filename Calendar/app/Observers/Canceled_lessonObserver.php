@@ -9,7 +9,7 @@ use App\Classroom;
 use App\ViewWeeklyLesson;
 use Carbon\Carbon;
 
-class CanceledLessonObserver
+class Canceled_lessonObserver
 {
     /**
      * Handle the CanceledLesson "created" event.

@@ -26,6 +26,6 @@ class PopulateSeeder extends Seeder
         factory('App\SpecialEvent', 200)->create();
         factory('App\ProfessorTeaching', 100)->create();
         factory('App\DegreeTeaching', 600)->create();
-        factory('App\degreeSpecialEvent', 25)->create();
+        factory('App\DegreeSpecialEvent', 25)->create();
     }
 }

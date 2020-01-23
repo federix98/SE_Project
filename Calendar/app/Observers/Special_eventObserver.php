@@ -9,7 +9,7 @@ use App\Classroom;
 use App\ViewWeeklyLesson;
 use Carbon\Carbon;
 
-class SpecialEventObserver
+class Special_eventObserver
 {
     /**
      * Handle the SpecialEvent "created" event.

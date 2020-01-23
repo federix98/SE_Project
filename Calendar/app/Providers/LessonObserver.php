@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers;
+namespace App\Providers;
 
 use App\Lesson;
 use Illuminate\Support\Facades\DB;

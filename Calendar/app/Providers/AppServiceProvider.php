@@ -31,9 +31,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        CanceledLesson::observe(CanceledLessonObserver::class);
-        ExtraLesson::observe(ExtraLessonObserver::class);
+        CanceledLesson::observe(Canceled_lessonObserver::class);
+        ExtraLesson::observe(Extra_lessonObserver::class);
         Lesson::observe(LessonObserver::class);
-        SpecialEvent::observe(SpecialEventObserver::class);
+        SpecialEvent::observe(Special_eventObserver::class);
     }
 }

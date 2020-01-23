@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers;
+namespace App\Providers;
 
 use App\ExtraLesson;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +10,7 @@ use App\ViewWeeklyLesson;
 use Carbon\Carbon;
 
 
-class ExtraLessonObserver
+class Extra_lessonObserver
 {
     /**
      * Handle the ExtraLesson "created" event.
