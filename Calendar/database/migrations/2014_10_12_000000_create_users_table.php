@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_role_id')->nullable()->default(1);
             $table->unsignedBigInteger('degree_id')->nullable();
+            $table->unsignedBigInteger('uni_degree_id')->nullable();
             $table->string('name', 45);
             $table->string('surname', 45);
             $table->string('matric_no', 7);

@@ -43,7 +43,12 @@ class User extends Authenticatable
 
     public function degree()
     {
-        return $this->belongsTo('App\Degree');
+        return $this->belongsTo('App\Degree','degree_id');
+    }
+
+    public function uniDegree()
+    {
+        return $this->belongsTo('App\Degree','uni_degree_id');
     }
 
     public function teachings()
