@@ -91,7 +91,7 @@ class ViewWeeklyLessonController extends Controller
      */
     public function getMyCalendar()
     {
-        $user = auth()->user();
+        $user = $request->user();
         if( $user->personal_calendar == 0 ) $teaching_ids = $user->degree->teachings->pluck('id');
         else $teaching_ids = $user->teachings->pluck('id');
 
