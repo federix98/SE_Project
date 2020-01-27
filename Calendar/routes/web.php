@@ -32,3 +32,7 @@ Route::get('edit_lessons', function () {
 Route::get('cancel_lessons', function () {
     return view('cancel_lesson');
 });
+
+Route::get('calendar', function () {
+    return view('calendar');
+});
