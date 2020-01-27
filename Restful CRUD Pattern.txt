@@ -36,3 +36,7 @@ public function destroy(department $department)
 
 
 validazione -> validator
+
+base path : univaqcalendarservice.org/api/v1
+
+Example get degrees admin

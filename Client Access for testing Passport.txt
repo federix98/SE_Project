@@ -13,7 +13,7 @@ Client secret : ilSBAY3WnuwuPkSjF3A1C9Brcoml7VChgJuRZFli
 Sostituire le variabile d'ambiente con le path variable
 
 Essendo che s3 è una piattaforma centralizzata espone gia le API
-Specificare che calendar è un array di lessons
+Specificare che calendar è un array di lessons e quindi un alias
 Aule di un corso di laurea
 Corsi in un aula
 parametri della search
