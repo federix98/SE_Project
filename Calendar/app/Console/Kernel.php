@@ -112,6 +112,7 @@ class Kernel extends ConsoleKernel
                     'special_events.date_event',
                     'special_events.start_time',
                     'special_events.duration',
+                    'special_events.name',
                     'classrooms.name as classroom_name')
                 ->join('classrooms', 'special_events.classroom_id', '=', 'classrooms.id')
                 ->get();
@@ -127,7 +128,7 @@ class Kernel extends ConsoleKernel
                     'canceled' => 0,
                     'start_time' => ($lesson->start_time),
                     'duration' => ($lesson->duration),
-                    'teaching_name' => null,
+                    'teaching_name' => ($lesson->name),
                     'classroom_name' => ($lesson->classroom_name)
                     ]);
                 }})->everyMinute(); // per testare lo faccio partire ogni minuto
