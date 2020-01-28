@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Degree as DegreeResource;
 use App\Http\Resources\ViewWeeklyLesson as CalendarResource;
 use App\Http\Resources\Professor as ProfessorResource;
-use app\Http\Resources\Teaching as TeachingResource;
+use App\Http\Resources\Teaching as TeachingResource;
+use App\Http\Resources\SpecialEvent as SpecialEventResource;
 use App\Degree;
+use App\Lesson;
 use Carbon\Carbon;
 use App\ViewWeeklyLesson;
 use App\Professor;
+use App\SpecialEvent;
 use Illuminate\Http\Request;
 
 class DegreeController extends Controller
@@ -104,13 +107,21 @@ class DegreeController extends Controller
     /**
      * Get Calendar from Degree
      *
-     * @param  \App\Degree  $Degree
+     * @param  \App\Degree  $degree
      * @return \Illuminate\Http\Response
      */
-    public function getCalendar(Degree $Degree) 
+    public function getCalendar(Degree $degree) 
     {
-        $teaching_ids = $Degree->teachings->pluck('id');   
-        return CalendarResource::collection(ViewWeeklyLesson::whereIn('teaching_id', $teaching_ids)->get());
+        $teaching_ids = $degree->teachings->pluck('id');   
+        $lessons = ViewWeeklyLesson::whereIn('teaching_id', $teaching_ids)->get();
+
+        $event_ids = $degree->specialEvents->pluck('id');   
+        $events = ViewWeeklyLesson::where('type', '=', '2')->whereIn('lesson_id', $event_ids)->get();
+        foreach($events as $event) {
+            $lessons->push($event);
+        }
+
+        return CalendarResource::collection($lessons);
     }
 
 
@@ -128,6 +139,19 @@ class DegreeController extends Controller
         $actual_ts = Carbon::now()->timestamp;
         $today_ts = Carbon::today()->timestamp;
 
+        // variabile per giorno della settimana
+        $weekMap = [
+            0 => 6,
+            1 => 0,
+            2 => 1,
+            3 => 2,
+            4 => 3,
+            5 => 4,
+            6 => 5,
+        ];
+        $dayOfTheWeek = Carbon::now()->dayOfWeek;
+        $weekday = $weekMap[$dayOfTheWeek];
+
         // Secondi passati dall'inizio della giornata
         $now_ts = $actual_ts - $today_ts;
 
@@ -136,7 +160,8 @@ class DegreeController extends Controller
         // Lezioni che mi interessano : start_time <= now AND start_time + duration > now
 
         $current_lessons = $my_weekly_lessons->where([
-            ['start_time', '<=', $now_slot]
+            ['start_time', '<=', $now_slot],
+            ['week_day', '=', $weekday]
         ])->whereRaw('start_time + duration > ?', [$now_slot])->get();
 
         return CalendarResource::collection($current_lessons);

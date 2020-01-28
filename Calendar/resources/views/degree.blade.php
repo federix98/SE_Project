@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- INCLUDE AXIOS -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<!-- INCLUDE VUEJS -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!-- INCLUDE JQUERY -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -22,14 +31,7 @@
         </div>
     </div>
 </div>
-<!-- INCLUDE AXIOS -->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-<!-- INCLUDE VUEJS -->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-<!-- INCLUDE JQUERY -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- My Code -->
 <script>
 

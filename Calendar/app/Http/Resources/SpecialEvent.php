@@ -22,6 +22,7 @@ class SpecialEvent extends JsonResource
             'start_time' => $this->start_time,
             'duration' => $this->duration,
             'info' => $this->info,
+            'degrees' => $this->degrees
         ];
     }
 }
