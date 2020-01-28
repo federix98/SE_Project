@@ -30,6 +30,7 @@ class Special_eventObserver
                 'lesson_id' => ($specialEvent->id),
                 'classroom_id' => ($specialEvent->classroom_id),
                 'week_day' => (Carbon::parse($specialEvent->date_event)->dayOfWeek),
+                'teaching_name' => ($specialEvent->name),
                 'type' => 2,
                 'canceled' => 0,
                 'start_time' => ($specialEvent->start_time),
