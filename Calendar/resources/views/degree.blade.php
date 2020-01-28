@@ -61,7 +61,7 @@
                 this.links = response.data.links;
                 console.log(response);
                 this.degrees.forEach(function(item){
-                    $('#dropDown').append('<option value="'+ item.id + '">' + item.name + '</option>');
+                    $('#dropDown').append('<option value="'+ item.id + '">' + item.name + ' - ' + item.year + ' Anno</option>');
                 });
             })
             .catch(error => {

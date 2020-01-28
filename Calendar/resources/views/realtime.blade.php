@@ -12,9 +12,6 @@
 <!-- INCLUDE JQUERY -->
 <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -24,9 +21,9 @@
                 <div class="card-body" id="center">
                 @isset($degree)
                 <div class="alert alert-warning" role="alert">
-                  <b><i>Dettagli Corso:</i></b><br>
+                  <b><i class="fas fa-id-card"></i> Dettagli Corso:</b><br>
                   <p style="display: none;">{{ $degree->id }}</p>
-                  <i class="fas fa-id-card"></i> <b>{{ $degree->SSD }}</b><br>
+                   SSD: <b>{{ $degree->SSD }}</b><br>
                   Nome: <b>{{ $degree->name }}</b><br>
                    Anno: <b>{{ $degree->year }}</b><br>
                 </div>

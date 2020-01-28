@@ -25,11 +25,11 @@ use Carbon\Carbon;
                 
                 
                 <div class="alert alert-warning" role="alert">
-                  <b>Dettagli corso di laurea:</b><br>
+                  <b><i class="fas fa-id-card"></i> Dettagli Corso:</b><br>
                   <p style="display: none;">{{ $degree->id }}</p>
-                  SSD: {{ $degree->SSD }}<br>
-                  Nome: {{ $degree->name }}<br>
-                  Anno: {{ $degree->year }}<br>
+                   SSD: <b>{{ $degree->SSD }}</b><br>
+                  Nome: <b>{{ $degree->name }}</b><br>
+                   Anno: <b>{{ $degree->year }}</b><br>
                 </div>
                 @endisset 
                 <div class="alert alert-light" role="alert">
@@ -225,17 +225,17 @@ use Carbon\Carbon;
                   if(item.duration == 1)
                     start_td.append('<div style="border: 1px solid black; box-shadow: 3px 3px 5px grey; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + item_name + "<br><b>" + item.classroom_name + "</b></div>");
                   else {
-                    start_td.append('<div style="border: 1px solid black; box-shadow: 3px 3px 5px grey; border-bottom-style:none; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + item_name + "<br><b>" + item.classroom_name + "</b></div>");
+                    start_td.append('<div style="border: 1px solid black; box-shadow: 3px 3px 5px grey; border-bottom-style:none; border-top: 2px solid black; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + item_name + "<br><b>" + item.classroom_name + "</b></div>");
                     var i;
                     for(i = 1; i < item.duration; i++) {
                       var i_tr = $('#table_body tr').eq(item.start_time-32+i);
                       var i_td = i_tr.children('td').eq( item.week_day );
                       // CONTROLLO SE è L'ULTIMO SLOT DELLA LEZIONE
                       if(i == item.duration-1){
-                        i_td.append('<div style="border: 1px solid black; border-top-style:none; box-shadow: 3px 3px 5px grey; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + item_name + "</div>");
+                        i_td.append('<div style="border: 1px solid black; border-top-style:none; border-bottom: 2px solid black; box-shadow: 3px 3px 5px grey; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + item_name + "</div>");
                       } 
                       else
-                        i_td.append('<div style="border: 1px solid black; border-bottom-style:none; box-shadow: 3px 3px 5px grey; border-top-style:none; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + item_name + "</div>");
+                        i_td.append('<div style="border: 1px solid black; border-bottom-style:none; border-top-style:none; box-shadow: 3px 3px 5px grey;  padding:2px; background-color:' + lesson_color + '; margin:2px;">' + item_name + "</div>");
                     }
                   }
                 });
