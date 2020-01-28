@@ -24,6 +24,10 @@ class DegreeController extends Controller
         return DegreeResource::collection(Degree::paginate(15));
     }
 
+    public function getAll() {
+        return DegreeResource::collection(Degree::all());
+    }
+
     /**
      * Show the form for creating a new resource.
      *

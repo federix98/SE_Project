@@ -28,6 +28,7 @@ Route::prefix('v1')->group(function () {
     // Shared Routes (DA IMPLEMENTARE)
     Route::get('classrooms/{classroom}', 'ClassroomController@show');
     Route::get('degrees', 'DegreeController@index');
+    Route::get('degrees/all', 'DegreeController@getAll');
     Route::get('degrees/{degree}/teachings', 'DegreeController@getTeachings');
     Route::get('professors/{professor}', 'ProfessorController@show'); 
     Route::post('teachings/search', 'TeachingController@search');

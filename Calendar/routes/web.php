@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -33,6 +29,8 @@ Route::get('cancel_lessons', function () {
     return view('cancel_lesson');
 });
 
-Route::get('calendar', function () {
-    return view('calendar');
+Route::get('calendar', 'FrontEnd\CalendarViewController@getCalendar');
+
+Route::get('/', function() {
+    return view('degree');
 });

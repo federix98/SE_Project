@@ -1,220 +1,237 @@
+@extends('layouts.app')
 
+@section('content')
+<?php
 
-<!------ Include the above in your HEAD tag ---------->
+use Carbon\Carbon;
 
-<!DOCTYPE html>
-<html>
+?>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Calendar</div>
+                @isset($degree)
+                <div class="alert alert-light" role="alert">
+                  <b>Dettagli corso di laurea:</b><br>
+                  <p style="display: none;">{{ $degree->id }}</p>
+                  SSD: {{ $degree->SSD }}<br>
+                  Nome: {{ $degree->name }}<br>
+                  Anno: {{ $degree->year }}<br>
+                </div>
+                @endisset 
+                <div class="alert alert-light" role="alert">
+                  Info<br>
+                  <div style="background-color:#EDFBEB;" class="alert alert-success" role="alert">
+                    Lezioni (ordinarie)
+                  </div>
+                  <div style="background-color:#CBDDFC;" class="alert alert-primary" role="alert">
+                    Lezioni Straordinarie
+                  </div>
+                  <div style="background-color:#FEDFFE;" class="alert alert-danger" role="alert">
+                    Eventi Speciali
+                  </div>
+                </div>
+                <div class="card-body">
+                <div>
+                  <?php
+                    $weekMap = [
+                      0 => 'Domenica',
+                      1 => 'Lunedì',
+                      2 => 'Martedì',
+                      3 => 'Mercoledì',
+                      4 => 'Giovedì',
+                      5 => 'Venerdì',
+                      6 => 'Sabato',
+                    ];
+                    $dayOfTheWeek = Carbon::now()->dayOfWeek;
+                    $weekday = $weekMap[$dayOfTheWeek];
+                    //echo 'Oggi è ' . $weekday;  //DEBUG GIORNO SETTIMANA DI OGGI
+                  ?>
+                </div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="width: 100px;"><i>Orario</i></th>
+                      <th scope="col" <?php if($dayOfTheWeek == 1) echo 'class="table-active"';?>>Lunedì
+                      <br><small><?php 
+                          $start_day = Carbon::now()->startOfWeek(Carbon::MONDAY);
+                          $start = $start_day->format('d-m-Y');
+                          echo "$start";
+                        ?></small>
+                      </th>
+                      <th scope="col" <?php if($dayOfTheWeek == 2) echo 'class="table-active"';?>>Martedì
+                      <br><small><?php 
+                        $tue = $start_day->copy()->addDay();
+                        $tuetoprint = $tue->format('d-m-Y');
+                        echo "$tuetoprint";
+                        ?></small>
+                        </th>
+                      <th scope="col" <?php if($dayOfTheWeek == 3) echo 'class="table-active"';?>>Mercoledì
+                      <br><small><?php 
+                        $wed = $tue->copy()->addDay();
+                        $wedtoprint = $wed->format('d-m-Y');
+                        echo "$wedtoprint";
+                        ?></small>
+                        </th>
+                      <th scope="col" <?php if($dayOfTheWeek == 4) echo 'class="table-active"';?>>Giovedì
+                      <br><small><?php 
+                        $thu = $wed->copy()->addDay();
+                        $thutoprint = $thu->format('d-m-Y');
+                        echo "$thutoprint";
+                        ?></small></th>
+                      <th scope="col" <?php if($dayOfTheWeek == 5) echo 'class="table-active"';?>>Venerdì
+                      <br><small><?php 
+                        $fri = $thu->copy()->addDay();
+                        $fritoprint = $fri->format('d-m-Y');
+                        echo "$fritoprint";
+                        ?></small></th>
+                      <th scope="col" <?php if($dayOfTheWeek == 6) echo 'class="table-active"';?>>Sabato
+                      <br><small><?php 
+                        $sat = $fri->copy()->addDay();
+                        $sattoprint = $sat->format('d-m-Y');
+                        echo "$sattoprint";
+                        ?></small></th>
+                      <th scope="col" <?php if($dayOfTheWeek == 0) echo 'class="table-active"';?>>Domenica
+                      <br><small><?php 
+                          $end = Carbon::now()->endOfWeek(Carbon::SUNDAY)->format('d-m-Y');
+                          echo "$end";
+                        ?></small>
+                    </tr>
+                  </thead>
+                  <tbody id="table_body">
+                  </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- INCLUDE AXIOS -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-<head>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="/js/calendar.js" type="text/javascript>"></script>
-    <link href="/css/calendar.css" rel="stylesheet"> 
-  <script>
-    $(document).ready(function() {
-      var date = new Date();
-      var d = date.getDate();
-      var m = date.getMonth();
-      var y = date.getFullYear();
-      /*  className colors
-		
-      className: default(transparent), important(red), chill(pink), success(green), info(blue)
-		
-      */
-      /* initialize the external events
-      -----------------------------------------------------------------*/
-      $('#external-events div.external-event').each(function() {
-        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-        // it doesn't need to have a start or end
-        var eventObject = {
-          title: $.trim($(this).text()) // use the element's text as the event title
-        };
-        // store the Event Object in the DOM element so we can get to it later
-        $(this).data('eventObject', eventObject);
-        // make the event draggable using jQuery UI
-        $(this).draggable({
-          zIndex: 999,
-          revert: true, // will cause the event to go back to its
-          revertDuration: 0 //  original position after the drag
-        });
-      });
-      /* initialize the calendar
-      -----------------------------------------------------------------*/
-      var calendar = $('#calendar').fullCalendar({
-        header: {
-          left: 'title',
-          center: 'agendaDay,agendaWeek,month',
-          right: 'prev,next today'
+<!-- INCLUDE VUEJS -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!-- INCLUDE JQUERY -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  function timestrToSec(timestr) {
+  var parts = timestr.split(":");
+  return (parts[0] * 3600) +
+         (parts[1] * 60) +
+         (+parts[2]);
+  }
+
+  function pad(num) {
+    if(num < 10) {
+      return "0" + num;
+    } else {
+      return "" + num;
+    }
+  }
+
+  function formatTime(seconds) {
+    return [pad(Math.floor(seconds/3600)),
+            pad(Math.floor(seconds/60)%60),
+            pad(seconds%60),
+            ].join(":");
+  }
+
+  var x = 15; //minutes interval
+  var times = []; // time array
+  var tt = 0; // start time
+  var ap = ['AM', 'PM']; // AM-PM
+
+  //loop to increment the time and push results in array
+  for (var i=0;tt<24*60; i++) {
+    var hh = Math.floor(tt/60); // getting hours of day in 0-24 format
+    var mm = (tt%60); // getting minutes of the hour in 0-55 format
+    times[i] = ("0" + (hh % 12)).slice(-2) + ':' + ("0" + mm).slice(-2) + ' ' + ap[Math.floor(hh/12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
+    tt = tt + x;
+  }
+
+  for(i = 0; i < 49; i++){
+    var start_time = "08:00:00";
+    if(i%2==0)
+      $('#table_body').append('<tr><th scope="row">' + times[i+32] + '</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');  
+    else
+    $('#table_body').append('<tr><th scope="row"></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');  
+    }
+
+  function getRandomColor() {
+      var letters = 'BCDEF'.split('');
+      var color = '#';
+      for (var i = 0; i < 6; i++ ) {
+          color += letters[Math.floor(Math.random() * letters.length)];
+      }
+      return color;
+  }
+
+  function getColorbyType(type) {
+    if(type == 0) {
+      return '#EDFBEB';
+    } else if(type == 1) {
+      return '#CBDDFC';
+    } else if(type == 2) {
+      return '#FEDFFE'
+    } else return '#000000';
+  }
+
+  // Chiamata ad API 
+  var table = new Vue({
+        
+        el: '#center',
+        
+        data: {
+            lessons: [],
+            meta: [],
+            links: []
         },
-        editable: true,
-        firstDay: 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
-        selectable: true,
-        defaultView: 'month',
-        axisFormat: 'h:mm',
-        columnFormat: {
-          month: 'ddd', // Mon
-          week: 'ddd d', // Mon 7
-          day: 'dddd M/d', // Monday 9/7
-          agendaDay: 'dddd d'
-        },
-        titleFormat: {
-          month: 'MMMM yyyy', // September 2009
-          week: "MMMM yyyy", // September 2009
-          day: 'MMMM yyyy' // Tuesday, Sep 8, 2009
-        },
-        allDaySlot: false,
-        selectHelper: true,
-        select: function(start, end, allDay) {
-          var title = prompt('Event Title:');
-          if (title) {
-            calendar.fullCalendar('renderEvent', {
-                title: title,
-                start: start,
-                end: end,
-                allDay: allDay
-              },
-              true // make the event "stick"
-            );
-          }
-          calendar.fullCalendar('unselect');
-        },
-        droppable: true, // this allows things to be dropped onto the calendar !!!
-        drop: function(date, allDay) { // this function is called when something is dropped
-          // retrieve the dropped element's stored Event Object
-          var originalEventObject = $(this).data('eventObject');
-          // we need to copy it, so that multiple events don't have a reference to the same object
-          var copiedEventObject = $.extend({}, originalEventObject);
-          // assign it the date that was reported
-          copiedEventObject.start = date;
-          copiedEventObject.allDay = allDay;
-          // render the event on the calendar
-          // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-          $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-          // is the "remove after drop" checkbox checked?
-          if ($('#drop-remove').is(':checked')) {
-            // if so, remove the element from the "Draggable Events" list
-            $(this).remove();
-          }
-        },
-        events: [{
-            title: 'All Day Event',
-            start: new Date(y, m, 1)
-          },
-          {
-            id: 999,
-            title: 'Repeating Event',
-            start: new Date(y, m, d - 3, 16, 0),
-            allDay: false,
-            className: 'info'
-          },
-          {
-            id: 999,
-            title: 'Repeating Event',
-            start: new Date(y, m, d + 4, 16, 0),
-            allDay: false,
-            className: 'info'
-          },
-          {
-            title: 'Meeting',
-            start: new Date(y, m, d, 10, 30),
-            allDay: false,
-            className: 'important'
-          },
-          {
-            title: 'Lunch',
-            start: new Date(y, m, d, 12, 0),
-            end: new Date(y, m, d, 14, 0),
-            allDay: false,
-            className: 'important'
-          },
-          {
-            title: 'Birthday Party',
-            start: new Date(y, m, d + 1, 19, 0),
-            end: new Date(y, m, d + 1, 22, 30),
-            allDay: false,
-          },
-          {
-            title: 'Click for Google',
-            start: new Date(y, m, 28),
-            end: new Date(y, m, 29),
-            url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
-            className: 'success'
-          }
-        ],
-      });
+
+        // Elemento caricato, equivalente di document.ready
+        mounted: function(){
+            axios({
+                method: 'get',
+                url: 'http://localhost:8000/api/v1/degrees/{{ $degree->id }}/calendar',
+                headers: {
+                    'Accept' : 'application/json',
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiYmM3ZjQ5YTJlZTk2YmU0MjljYTllNzUzNmVlZTA5MzdkMTk0YjVjN2U2Y2JkYzBkZDMxMGJmMmIyNzg1YmNkZGI4M2Y4NTYzNDI3ZTczZGQiLCJpYXQiOjE1Nzk2NDU4NjUsIm5iZiI6MTU3OTY0NTg2NSwiZXhwIjoxNjExMjY4MjY1LCJzdWIiOiIxNjAyIiwic2NvcGVzIjpbXX0.e7GK8WdQy2dw5QbhgBsTWFHb46iVl3t9j5WN1p9jztVw8yTv0eyWuqJm6eqp_8jNbqNGK41TdlLw6kkhjdD3lEG2BZtMahqG6qJMwGtTqkqpj7Cs1uQ9EAV4E6YzT4kk54xxZ9TKviJkyIEGmslfLjp69h-77Kj6gzrSYp6BnDh6N_iGCqFxce4VpT67NlJPuJC401rg6WXkD_Bdee_pIEwfejkrpF4Mpy64Oa9HEYg544dC5MvHtaY9L4lZ70w8z5E0A7R3xVGAPE_-H1amUl-tHqo1jdtf29uVC8eWfg_0XjYA1cFCXwbprG3_bdrc3Xi4evBiA2u3mCBXFRFLf7ZNK7rM4ctgJt3lz6CAhYxwqfXXsixAXzvM3xfqtdhOGVfccUuHxjCybvdZr4ZWz7Qu0UrxNb-3rP80WFoAY_BhyJz8XuCgeSibfgYqklW0VTXyYQYZN0FkE_MXfLOS5eU4oY4qwBcxd8dOSLE1b4f3gq7NPTotGoUZZ3JgMPJddNzFtRxDl3cCS_7qonFQK6u9jRscXFg3eVrXpcN-hF4EvRskWXcoGhw4wjhub8MEN1wkVlcwlW4AU4pVnOWytyjZNOnDTDbAQqz0BHIxMLih69N5-K0ZNIO_bi-ISACb3s_kIVy5dZTX9M_wJ7jGlVYABTGUU7wU-GHos6un3U0'
+                    }
+            })
+            .then(response => {
+                this.lessons = response.data.data;
+                console.log(response);
+                this.lessons.forEach(function(item){
+                  console.log('Analyzing lesson with id ' + item.id);
+                  var start_tr = $('#table_body tr').eq(item.start_time-32);
+                  var start_td = start_tr.children('td').eq( item.week_day );
+                  var lesson_color = getColorbyType(item.type);
+                  if(item.duration == 1)
+                    start_td.append('<div style="border: 1px solid black; box-shadow: 3px 3px 5px grey; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + item.teaching_name + "<br><b>" + item.classroom_name + "</b></div>");
+                  else {
+                    start_td.append('<div style="border: 1px solid black; box-shadow: 3px 3px 5px grey; border-bottom-style:none; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + item.teaching_name + "<br><b>" + item.classroom_name + "</b></div>");
+                    var i;
+                    for(i = 1; i < item.duration; i++) {
+                      var i_tr = $('#table_body tr').eq(item.start_time-32+i);
+                      var i_td = i_tr.children('td').eq( item.week_day );
+                      // CONTROLLO SE è L'ULTIMO SLOT DELLA LEZIONE
+                      if(i == item.duration-1){
+                        i_td.append('<div style="border: 1px solid black; border-top-style:none; box-shadow: 3px 3px 5px grey; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + item.teaching_name + "</div>");
+                      } 
+                      else
+                        i_td.append('<div style="border: 1px solid black; border-bottom-style:none; box-shadow: 3px 3px 5px grey; border-top-style:none; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + item.teaching_name + "</div>");
+                    }
+                  }
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });
+        }
     });
-  </script>
-  <style>
-    body {
-      margin-bottom: 40px;
-      margin-top: 40px;
-      text-align: center;
-      font-size: 14px;
-      font-family: "Open Sans", sans-serif;
-      background: url(http://www.digiphotohub.com/wp-content/uploads/2015/09/bigstock-Abstract-Blurred-Background-Of-92820527.jpg);
-    }
-
-    #wrap {
-      width: 1100px;
-      margin: 0 auto;
-    }
-
-    #external-events {
-      float: left;
-      width: 150px;
-      padding: 0 10px;
-      text-align: left;
-    }
-
-    #external-events h4 {
-      font-size: 16px;
-      margin-top: 0;
-      padding-top: 1em;
-    }
-
-    .external-event {
-      /* try to mimick the look of a real event */
-      margin: 10px 0;
-      padding: 2px 4px;
-      background: #3366CC;
-      color: #fff;
-      font-size: .85em;
-      cursor: pointer;
-    }
-
-    #external-events p {
-      margin: 1.5em 0;
-      font-size: 11px;
-      color: #666;
-    }
-
-    #external-events p input {
-      margin: 0;
-      vertical-align: middle;
-    }
-
-    #calendar {
-      /* 		float: right; */
-      margin: 0 auto;
-      width: 900px;
-      background-color: #FFFFFF;
-      border-radius: 6px;
-      box-shadow: 0 1px 2px #C3C3C3;
-      -webkit-box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
-      -moz-box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
-      box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
-    }
-  </style>
-</head>
-
-<body>
-  <div id='wrap'>
-
-    <div id='calendar'></div>
-
-    <div style='clear:both'></div>
-  </div>
-</body>
-
-</html>
+</script>
+@endsection
