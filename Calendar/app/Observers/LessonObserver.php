@@ -25,7 +25,7 @@ class LessonObserver
             $teaching = Teaching::find($lesson->teaching_id);
 
             DB::table('view_weekly_lessons')->insertGetId( [
-                'lesson_id' => ($lesson->id),
+                'item_id' => ($lesson->id),
                 'teaching_id' => ($lesson->teaching_id),
                 'classroom_id' => ($lesson->classroom_id),
                 'week_day' => ($lesson->week_day),
@@ -33,7 +33,7 @@ class LessonObserver
                 'canceled' => 0,
                 'start_time' => ($lesson->start_time),
                 'duration' => ($lesson->duration),
-                'teaching_name' => ($teaching->name),
+                'item_name' => ($teaching->name),
                 'classroom_name' => ($classroom->name)
                 ]);
         }
@@ -60,7 +60,7 @@ class LessonObserver
     public function deleted(Lesson $lesson)
     {
         $viewLesson = DB::table('view_weekly_lessons')
-        ->where('view_weekly_lessons.lesson_id', '=', $lesson->id )
+        ->where('view_weekly_lessons.item_id', '=', $lesson->id )
         ->where('view_weekly_lessons.type', '=', 0)
         ->select( 'view_weekly_lessons.id' )
         ->get();

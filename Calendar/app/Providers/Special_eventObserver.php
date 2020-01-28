@@ -27,11 +27,12 @@ class Special_eventObserver
         if ( ( $date > $specialEvent->date_event  ) && ( $specialEvent->date_event > Carbon::yesterday() ) )
         {
             DB::table('view_weekly_lessons')->insertGetId( [
-                'lesson_id' => ($specialEvent->id),
+                'item_id' => ($specialEvent->id),
                 'classroom_id' => ($specialEvent->classroom_id),
                 'week_day' => (Carbon::parse($specialEvent->date_event)->dayOfWeek),
                 'type' => 2,
                 'canceled' => 0,
+                'item_name' => ($specialEvent->name),
                 'start_time' => ($specialEvent->start_time),
                 'duration' => ($specialEvent->duration),
                 'classroom_name' => ($classroom->name)
@@ -60,7 +61,7 @@ class Special_eventObserver
     public function deleted(SpecialEvent $specialEvent)
     {
         $lesson = DB::table('view_weekly_lessons')
-        ->where('view_weekly_lessons.lesson_id', '=', $specialEvent->id )
+        ->where('view_weekly_lessons.item_id', '=', $specialEvent->id )
         ->where('view_weekly_lessons.type', '=', 2)
         ->select( 'view_weekly_lessons.id' )
         ->get();

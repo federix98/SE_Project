@@ -25,7 +25,7 @@ class Canceled_lessonObserver
         if ( ( $date > $canceledLesson->date_lesson ) && ( $canceledLesson->date_lesson > Carbon::yesterday() ) )
         {
             $viewLesson = DB::table('view_weekly_lessons')
-            ->where('view_weekly_lessons.lesson_id', '=', $canceledLesson->lesson_id )
+            ->where('view_weekly_lessons.item_id', '=', $canceledLesson->lesson_id )
             ->where('view_weekly_lessons.type', '=', 0)
             ->update(['canceled' => 1]);
         }
@@ -57,7 +57,7 @@ class Canceled_lessonObserver
         if ( $date > $canceledLesson->date_lesson )
         {
             $viewLesson = DB::table('view_weekly_lessons')
-            ->where('view_weekly_lessons.lesson_id', '=', $canceledLesson->lesson_id )
+            ->where('view_weekly_lessons.item_id', '=', $canceledLesson->lesson_id )
             ->where('view_weekly_lessons.type', '=', 0)
             ->update(['canceled' => 0]);
         }

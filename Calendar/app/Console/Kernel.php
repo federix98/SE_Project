@@ -56,7 +56,7 @@ class Kernel extends ConsoleKernel
                     else { $lesson->canceled = 1; }
                     
                     DB::table('view_weekly_lessons')->insertGetId( [
-                        'lesson_id' => ($lesson->lesson_id),
+                        'item_id' => ($lesson->lesson_id),
                         'teaching_id' => ($lesson->teaching_id),
                         'classroom_id' => ($lesson->classroom_id),
                         'week_day' => ($lesson->week_day),
@@ -64,7 +64,7 @@ class Kernel extends ConsoleKernel
                         'canceled' => ($lesson->canceled),
                         'start_time' => ($lesson->start_time),
                         'duration' => ($lesson->duration),
-                        'teaching_name' => ($lesson->teaching_name),
+                        'item_name' => ($lesson->teaching_name),
                         'classroom_name' => ($lesson->classroom_name)
                         ]);
                 }
@@ -89,7 +89,7 @@ class Kernel extends ConsoleKernel
                 foreach ($lessons as $lesson) {
                 
                 DB::table('view_weekly_lessons')->insertGetId( [
-                    'lesson_id' => ($lesson->lesson_id),
+                    'item_id' => ($lesson->lesson_id),
                     'teaching_id' => ($lesson->teaching_id),
                     'classroom_id' => ($lesson->classroom_id),
                     'week_day' => (Carbon::parse($lesson->date_lesson)->dayOfWeek),
@@ -97,7 +97,7 @@ class Kernel extends ConsoleKernel
                     'canceled' => 0,
                     'start_time' => ($lesson->start_time),
                     'duration' => ($lesson->duration),
-                    'teaching_name' => ($lesson->teaching_name),
+                    'item_name' => ($lesson->teaching_name),
                     'classroom_name' => ($lesson->classroom_name)
                     ]);
                 }
@@ -120,7 +120,7 @@ class Kernel extends ConsoleKernel
                 foreach ($lessons as $lesson) {
                 
                 DB::table('view_weekly_lessons')->insertGetId( [
-                    'lesson_id' => ($lesson->lesson_id),
+                    'item_id' => ($lesson->lesson_id),
                     'teaching_id' => null,
                     'classroom_id' => ($lesson->classroom_id),
                     'week_day' => (Carbon::parse($lesson->date_event)->dayOfWeek),
@@ -128,7 +128,7 @@ class Kernel extends ConsoleKernel
                     'canceled' => 0,
                     'start_time' => ($lesson->start_time),
                     'duration' => ($lesson->duration),
-                    'teaching_name' => ($lesson->name),
+                    'item_name' => ($lesson->name),
                     'classroom_name' => ($lesson->classroom_name)
                     ]);
                 }})->everyMinute(); // per testare lo faccio partire ogni minuto

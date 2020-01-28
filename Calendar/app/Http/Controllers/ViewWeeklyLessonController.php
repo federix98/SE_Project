@@ -100,7 +100,7 @@ class ViewWeeklyLessonController extends Controller
         $collection = collect();
 
         $lessons = DB::table('view_weekly_lessons')
-        ->whereIn('lesson_id', $teaching_ids)
+        ->whereIn('item_id', $teaching_ids)
         ->where('view_weekly_lessons.type', '!=', 2 )
         ->select('view_weekly_lessons.*')
         ->get();
@@ -108,7 +108,7 @@ class ViewWeeklyLessonController extends Controller
         foreach( $lessons as $lesson ) $collection->push($lesson);
 
         $events = DB::table('view_weekly_lessons')
-        ->whereIn('lesson_id', $eventIDs)
+        ->whereIn('item_id', $eventIDs)
         ->where('view_weekly_lessons.type', '=', 2 )
         ->select('view_weekly_lessons.*')
         ->get();
