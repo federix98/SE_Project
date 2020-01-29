@@ -16,7 +16,7 @@ class ViewWeeklyLesson extends JsonResource
     {
         return [
             'id' => $this->id,
-            'lesson_id' => $this->lesson_id,
+            'item_id' => $this->item_id,
             'teaching_id' => $this->teaching_id,
             'classroom_id' => $this->classroom_id,
             'week_day' => $this->week_day,
@@ -24,7 +24,7 @@ class ViewWeeklyLesson extends JsonResource
             'canceled' => $this->canceled,
             'start_time' => $this->start_time,
             'duration' => $this->duration,
-            'teaching_name' => $this->teaching_name,
+            'item_name' => $this->item_name,
             'classroom_name' => $this->classroom_name,
         ];
     }
