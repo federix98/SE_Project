@@ -158,7 +158,7 @@ class TeachingController extends Controller
      */
     public function search(Request $request)
     {
-        // DA IMPLEMENTARE
+        // al futuro me di 2 settimane : ricordati di aggiornare la documentazione riguardo item_id e item_name
     }
 
     /**
