@@ -20,9 +20,9 @@ Route::prefix('v1')->group(function () {
     // --- Student APIs ---
 
     // Anonymous
-    Route::get('degrees/{degree}/calendar', 'DegreeController@getCalendar');
+    Route::get('degrees/{degree}/calendar', 'DegreeController@getCalendar'); // DENTRO è IMPLEMENTATA ANCHE LA CHIAMATA /calendar?current_true PER LE LEZIONI REAL TIME
     Route::get('degrees/{degree}/calendar/month', 'DegreeController@getMonthlyCalendar');
-    Route::get('degrees/{degree}/current', 'DegreeController@getCurrentLessons');
+    //Route::get('degrees/{degree}/current', 'DegreeController@getCurrentLessons');
     Route::get('degrees/{degree}/professors', 'DegreeController@getProfessors');
 
     // Shared Routes (DA IMPLEMENTARE)
@@ -49,7 +49,6 @@ Route::prefix('v1')->group(function () {
             Route::get('user', 'AuthController@user');
             Route::get('me/calendar', 'UserController@getCalendar'); // DENTRO è IMPLEMENTATA ANCHE LA CHIAMATA /calendar?current_true PER LE LEZIONI REAL TIME
             Route::get('me/professors', 'UserController@getProfessors');
-            Route::get('me/current', 'UserController@getCurrentLessons');
             Route::get('me/updates', 'UserController@getUpdates');
             Route::get('me/updates/new', 'UserController@checkUpdates');
             Route::post('me/calendar/reset', 'UserController@resetCalendar');
