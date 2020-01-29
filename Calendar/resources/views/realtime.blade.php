@@ -113,7 +113,7 @@
         mounted: function(){
             axios({
                 method: 'get',
-                url: 'http://localhost:8000/api/v1/degrees/{{ $degree->id }}/current',
+                url: 'http://localhost:8000/api/v1/degrees/{{ $degree->id }}/calendar?current=true',
                 headers: {
                     'Accept' : 'application/json',
                     'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiYmM3ZjQ5YTJlZTk2YmU0MjljYTllNzUzNmVlZTA5MzdkMTk0YjVjN2U2Y2JkYzBkZDMxMGJmMmIyNzg1YmNkZGI4M2Y4NTYzNDI3ZTczZGQiLCJpYXQiOjE1Nzk2NDU4NjUsIm5iZiI6MTU3OTY0NTg2NSwiZXhwIjoxNjExMjY4MjY1LCJzdWIiOiIxNjAyIiwic2NvcGVzIjpbXX0.e7GK8WdQy2dw5QbhgBsTWFHb46iVl3t9j5WN1p9jztVw8yTv0eyWuqJm6eqp_8jNbqNGK41TdlLw6kkhjdD3lEG2BZtMahqG6qJMwGtTqkqpj7Cs1uQ9EAV4E6YzT4kk54xxZ9TKviJkyIEGmslfLjp69h-77Kj6gzrSYp6BnDh6N_iGCqFxce4VpT67NlJPuJC401rg6WXkD_Bdee_pIEwfejkrpF4Mpy64Oa9HEYg544dC5MvHtaY9L4lZ70w8z5E0A7R3xVGAPE_-H1amUl-tHqo1jdtf29uVC8eWfg_0XjYA1cFCXwbprG3_bdrc3Xi4evBiA2u3mCBXFRFLf7ZNK7rM4ctgJt3lz6CAhYxwqfXXsixAXzvM3xfqtdhOGVfccUuHxjCybvdZr4ZWz7Qu0UrxNb-3rP80WFoAY_BhyJz8XuCgeSibfgYqklW0VTXyYQYZN0FkE_MXfLOS5eU4oY4qwBcxd8dOSLE1b4f3gq7NPTotGoUZZ3JgMPJddNzFtRxDl3cCS_7qonFQK6u9jRscXFg3eVrXpcN-hF4EvRskWXcoGhw4wjhub8MEN1wkVlcwlW4AU4pVnOWytyjZNOnDTDbAQqz0BHIxMLih69N5-K0ZNIO_bi-ISACb3s_kIVy5dZTX9M_wJ7jGlVYABTGUU7wU-GHos6un3U0'
@@ -143,7 +143,7 @@
                     var mins = (actual_sec - start_sec) / 60;
 
                     //console.log(timestrToSec(start));
-                    $('#table_body').append('<tr><td>' + item.teaching_name + '</td><td>' + item.classroom_name + '</td><td>' + parseInt(mins) + ' minuti &nbsp;<small>(' + times[item.start_time] + ')</small></td><td>' + times[item.start_time + item.duration] + '</td></tr>');  
+                    $('#table_body').append('<tr><td>' + item.item_name + '</td><td>' + item.classroom_name + '</td><td>' + parseInt(mins) + ' minuti &nbsp;<small>(' + times[item.start_time] + ')</small></td><td>' + times[item.start_time + item.duration] + '</td></tr>');  
                 });
                 }
             })

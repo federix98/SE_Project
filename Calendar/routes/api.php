@@ -47,8 +47,7 @@ Route::prefix('v1')->group(function () {
         ], function() {
             Route::get('logout', 'AuthController@logout');
             Route::get('user', 'AuthController@user');
-            Route::get('me/calendar', 'UserController@getCalendar');
-            Route::get('me/calendar/month', 'UserController@getMonthlyCalendar');
+            Route::get('me/calendar', 'UserController@getCalendar'); // DENTRO è IMPLEMENTATA ANCHE LA CHIAMATA /calendar?current_true PER LE LEZIONI REAL TIME
             Route::get('me/professors', 'UserController@getProfessors');
             Route::get('me/current', 'UserController@getCurrentLessons');
             Route::get('me/updates', 'UserController@getUpdates');

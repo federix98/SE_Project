@@ -104,25 +104,7 @@ class DegreeController extends Controller
         return response()->json(null, 204);
     }
 
-    /**
-     * Get Calendar from Degree
-     *
-     * @param  \App\Degree  $degree
-     * @return \Illuminate\Http\Response
-     */
-    public function getCalendar(Degree $degree) 
-    {
-        $teaching_ids = $degree->teachings->pluck('id');   
-        $lessons = ViewWeeklyLesson::whereIn('teaching_id', $teaching_ids)->get();
-
-        $event_ids = $degree->specialEvents->pluck('id');   
-        $events = ViewWeeklyLesson::where('type', '=', '2')->whereIn('lesson_id', $event_ids)->get();
-        foreach($events as $event) {
-            $lessons->push($event);
-        }
-
-        return CalendarResource::collection($lessons);
-    }
+    
 
 
     /**
@@ -166,6 +148,29 @@ class DegreeController extends Controller
 
         return CalendarResource::collection($current_lessons);
 
+    }
+
+    /**
+     * Get Calendar from Degree
+     *
+     * @param  \App\Degree  $degree
+     * @return \Illuminate\Http\Response
+     */
+
+    public function getCalendar(Request $request, Degree $degree) 
+    {
+        $current = $request->input('current');
+        if($current == true) return DegreeController::getCurrentLessons($degree);
+        $teaching_ids = $degree->teachings->pluck('id');   
+        $lessons = ViewWeeklyLesson::whereIn('teaching_id', $teaching_ids)->get();
+
+        $event_ids = $degree->specialEvents->pluck('id');   
+        $events = ViewWeeklyLesson::where('type', '=', '2')->whereIn('lesson_id', $event_ids)->get();
+        foreach($events as $event) {
+            $lessons->push($event);
+        }
+
+        return CalendarResource::collection($lessons);
     }
 
     /**
