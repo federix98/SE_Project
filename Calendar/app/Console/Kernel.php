@@ -34,8 +34,8 @@ class Kernel extends ConsoleKernel
 
                 // inserting regular lessons
                 $lessons = DB::table('lessons')
-                ->whereDate('lessons.start_date', '<', Carbon::today()->addDays(5))
-                ->whereDate('lessons.end_date', '>', Carbon::today()->subDays(5))
+                ->whereDate('lessons.start_date', '<', Carbon::today()->addDays(7))
+                ->whereDate('lessons.end_date', '>', Carbon::yesterday())
                 ->select(
                     'lessons.id as lesson_id',
                     'lessons.teaching_id',
@@ -72,7 +72,7 @@ class Kernel extends ConsoleKernel
                   // inserting extra lessons
                 $lessons = DB::table('extra_lessons')
                 ->whereDate('extra_lessons.date_lesson', '>', Carbon::yesterday())
-                ->whereDate('extra_lessons.date_lesson', '<', Carbon::today()->addDays(5))
+                ->whereDate('extra_lessons.date_lesson', '<', Carbon::today()->addDays(7))
                 ->select(
                     'extra_lessons.id as lesson_id',
                     'extra_lessons.teaching_id',
@@ -105,7 +105,7 @@ class Kernel extends ConsoleKernel
                 // inserting events
                 $lessons = DB::table('special_events')
                 ->whereDate('special_events.date_event', '>', Carbon::yesterday())
-                ->whereDate('special_events.date_event', '<', Carbon::today()->addDays(5))
+                ->whereDate('special_events.date_event', '<', Carbon::today()->addDays(7))
                 ->select(
                     'special_events.id as lesson_id',
                     'special_events.classroom_id',
@@ -131,8 +131,7 @@ class Kernel extends ConsoleKernel
                     'item_name' => ($lesson->name),
                     'classroom_name' => ($lesson->classroom_name)
                     ]);
-                }})->everyMinute(); // per testare lo faccio partire ogni minuto
-                //->weekly()->timezone('Europe/Rome');
+                }})->weekly()->timezone('Europe/Rome');
     }
 
     /**
