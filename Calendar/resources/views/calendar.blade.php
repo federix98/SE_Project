@@ -14,13 +14,24 @@ use Carbon\Carbon;
             <div class="card">
             @isset($degree)
                 <div class="card-header">
-                <div class="container">
-                  <form action="/calendar/now" method="GET">
-                    <input type="hidden" value="{{ $degree->id }}" name="opt">
-                    {{ csrf_field() }}
-                  <button type="submit" class="btn btn-primary">Lezioni Real Time</button>
-                  </form>
-                </div>  
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <form action="/calendar/now" method="GET">
+                          <input type="hidden" value="{{ $degree->id }}" name="opt">
+                          {{ csrf_field() }}
+                        <button type="submit" class="btn btn-primary">Lezioni Real Time</button>
+                        </form>
+                      </div>
+                      <div class="col-md-3">
+                        <form action="/calendar/professors" method="GET">
+                          <input type="hidden" value="{{ $degree->id }}" name="opt">
+                          {{ csrf_field() }}
+                        <button type="submit" class="btn btn-primary">I Miei Professori</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>  
                 </div>
                 
                 
@@ -208,7 +219,7 @@ use Carbon\Carbon;
                 url: 'http://localhost:8000/api/v1/degrees/{{ $degree->id }}/calendar',
                 headers: {
                     'Accept' : 'application/json',
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiYmM3ZjQ5YTJlZTk2YmU0MjljYTllNzUzNmVlZTA5MzdkMTk0YjVjN2U2Y2JkYzBkZDMxMGJmMmIyNzg1YmNkZGI4M2Y4NTYzNDI3ZTczZGQiLCJpYXQiOjE1Nzk2NDU4NjUsIm5iZiI6MTU3OTY0NTg2NSwiZXhwIjoxNjExMjY4MjY1LCJzdWIiOiIxNjAyIiwic2NvcGVzIjpbXX0.e7GK8WdQy2dw5QbhgBsTWFHb46iVl3t9j5WN1p9jztVw8yTv0eyWuqJm6eqp_8jNbqNGK41TdlLw6kkhjdD3lEG2BZtMahqG6qJMwGtTqkqpj7Cs1uQ9EAV4E6YzT4kk54xxZ9TKviJkyIEGmslfLjp69h-77Kj6gzrSYp6BnDh6N_iGCqFxce4VpT67NlJPuJC401rg6WXkD_Bdee_pIEwfejkrpF4Mpy64Oa9HEYg544dC5MvHtaY9L4lZ70w8z5E0A7R3xVGAPE_-H1amUl-tHqo1jdtf29uVC8eWfg_0XjYA1cFCXwbprG3_bdrc3Xi4evBiA2u3mCBXFRFLf7ZNK7rM4ctgJt3lz6CAhYxwqfXXsixAXzvM3xfqtdhOGVfccUuHxjCybvdZr4ZWz7Qu0UrxNb-3rP80WFoAY_BhyJz8XuCgeSibfgYqklW0VTXyYQYZN0FkE_MXfLOS5eU4oY4qwBcxd8dOSLE1b4f3gq7NPTotGoUZZ3JgMPJddNzFtRxDl3cCS_7qonFQK6u9jRscXFg3eVrXpcN-hF4EvRskWXcoGhw4wjhub8MEN1wkVlcwlW4AU4pVnOWytyjZNOnDTDbAQqz0BHIxMLih69N5-K0ZNIO_bi-ISACb3s_kIVy5dZTX9M_wJ7jGlVYABTGUU7wU-GHos6un3U0'
+                    //'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiYmM3ZjQ5YTJlZTk2YmU0MjljYTllNzUzNmVlZTA5MzdkMTk0YjVjN2U2Y2JkYzBkZDMxMGJmMmIyNzg1YmNkZGI4M2Y4NTYzNDI3ZTczZGQiLCJpYXQiOjE1Nzk2NDU4NjUsIm5iZiI6MTU3OTY0NTg2NSwiZXhwIjoxNjExMjY4MjY1LCJzdWIiOiIxNjAyIiwic2NvcGVzIjpbXX0.e7GK8WdQy2dw5QbhgBsTWFHb46iVl3t9j5WN1p9jztVw8yTv0eyWuqJm6eqp_8jNbqNGK41TdlLw6kkhjdD3lEG2BZtMahqG6qJMwGtTqkqpj7Cs1uQ9EAV4E6YzT4kk54xxZ9TKviJkyIEGmslfLjp69h-77Kj6gzrSYp6BnDh6N_iGCqFxce4VpT67NlJPuJC401rg6WXkD_Bdee_pIEwfejkrpF4Mpy64Oa9HEYg544dC5MvHtaY9L4lZ70w8z5E0A7R3xVGAPE_-H1amUl-tHqo1jdtf29uVC8eWfg_0XjYA1cFCXwbprG3_bdrc3Xi4evBiA2u3mCBXFRFLf7ZNK7rM4ctgJt3lz6CAhYxwqfXXsixAXzvM3xfqtdhOGVfccUuHxjCybvdZr4ZWz7Qu0UrxNb-3rP80WFoAY_BhyJz8XuCgeSibfgYqklW0VTXyYQYZN0FkE_MXfLOS5eU4oY4qwBcxd8dOSLE1b4f3gq7NPTotGoUZZ3JgMPJddNzFtRxDl3cCS_7qonFQK6u9jRscXFg3eVrXpcN-hF4EvRskWXcoGhw4wjhub8MEN1wkVlcwlW4AU4pVnOWytyjZNOnDTDbAQqz0BHIxMLih69N5-K0ZNIO_bi-ISACb3s_kIVy5dZTX9M_wJ7jGlVYABTGUU7wU-GHos6un3U0'
                     }
             })
             .then(response => {
@@ -222,10 +233,11 @@ use Carbon\Carbon;
                   var name;
                   if(item.type == 2) name = "EVENTO SPECIALE: " + item.item_name;
                   else name = item.item_name;
+                  var class_subs = '<a href="/class_detail?id=' + item.classroom_id + '">' + item.classroom_name + '</a>';
                   if(item.duration == 1)
-                    start_td.append('<div style="border: 1px solid black; box-shadow: 3px 3px 5px grey; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + name + "<br><b>" + item.classroom_name + "</b></div>");
+                    start_td.append('<div style="border: 1px solid black; box-shadow: 3px 3px 5px grey; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + name + "<br><b>" + class_subs + "</b></div>");
                   else {
-                    start_td.append('<div style="border: 1px solid black; box-shadow: 3px 3px 5px grey; border-bottom-style:none; border-top: 2px solid black; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + name + "<br><b>" + item.classroom_name + "</b></div>");
+                    start_td.append('<div style="border: 1px solid black; box-shadow: 3px 3px 5px grey; border-bottom-style:none; border-top: 2px solid black; padding:2px; background-color:' + lesson_color + '; margin:2px;">' + name + "<br><b>" + class_subs + "</b></div>");
                     var i;
                     for(i = 1; i < item.duration; i++) {
                       var i_tr = $('#table_body tr').eq(item.start_time-32+i);

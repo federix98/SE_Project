@@ -17,6 +17,7 @@ class Classroom extends JsonResource
         return [
             'id' => $this->id,
             'building_id' => $this->building_id,
+            'building' => $this->building->name,
             'name' => $this->name,
             'floor' => $this->floor,
             'directions' => $this->directions,

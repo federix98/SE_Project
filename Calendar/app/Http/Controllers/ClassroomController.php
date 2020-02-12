@@ -47,7 +47,7 @@ class ClassroomController extends Controller
      */
     public function show(Classroom $Classroom)
     {
-        //
+        return new ClassroomResource($Classroom);
     }
 
     /**

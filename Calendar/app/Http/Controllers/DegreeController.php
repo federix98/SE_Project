@@ -165,7 +165,7 @@ class DegreeController extends Controller
         $lessons = ViewWeeklyLesson::whereIn('teaching_id', $teaching_ids)->get();
 
         $event_ids = $degree->specialEvents->pluck('id');   
-        $events = ViewWeeklyLesson::where('type', '=', '2')->whereIn('lesson_id', $event_ids)->get();
+        $events = ViewWeeklyLesson::where('type', '=', '2')->whereIn('item_id', $event_ids)->get();
         foreach($events as $event) {
             $lessons->push($event);
         }
