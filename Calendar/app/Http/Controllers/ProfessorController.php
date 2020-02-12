@@ -88,7 +88,7 @@ class ProfessorController extends Controller
     /**
      * ritorna la lista dei Professori dell'utente che ha eseguito il login
      */
-    public function getMyProfessors()
+    public function getMyProfessors(Request $request)
     {   
         $user = $request->user();
         if( $user->personal_calendar == 0 ) $teaching_ids = $user->degree->teachings->pluck('id');
