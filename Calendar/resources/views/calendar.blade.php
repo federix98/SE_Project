@@ -14,13 +14,24 @@ use Carbon\Carbon;
             <div class="card">
             @isset($degree)
                 <div class="card-header">
-                <div class="container">
-                  <form action="/calendar/now" method="GET">
-                    <input type="hidden" value="{{ $degree->id }}" name="opt">
-                    {{ csrf_field() }}
-                  <button type="submit" class="btn btn-primary">Lezioni Real Time</button>
-                  </form>
-                </div>  
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <form action="/calendar/now" method="GET">
+                          <input type="hidden" value="{{ $degree->id }}" name="opt">
+                          {{ csrf_field() }}
+                        <button type="submit" class="btn btn-primary">Lezioni Real Time</button>
+                        </form>
+                      </div>
+                      <div class="col-md-3">
+                        <form action="/calendar/professors" method="GET">
+                          <input type="hidden" value="{{ $degree->id }}" name="opt">
+                          {{ csrf_field() }}
+                        <button type="submit" class="btn btn-primary">I Miei Professori</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>  
                 </div>
                 
                 

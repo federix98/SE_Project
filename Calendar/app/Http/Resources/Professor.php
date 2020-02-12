@@ -18,7 +18,9 @@ class Professor extends JsonResource
         return [
             'id' => $this->id,
             'professor_role_id' => $this->professor_role_id,
+            'role' => $this->role->name,
             'department_id' => $this->department_id,
+            'department' => $this->department->name,
             'name' => $this->name,
             'surname' => $this->surname,
             'office_address' => $this->office_address,

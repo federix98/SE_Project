@@ -20,4 +20,10 @@ class CalendarViewController extends Controller
         
         return view('realtime', ['degree' => $degree]);
     }
+
+    public function getProfessors(Request $request){
+        $degree = degree::find($request->input('opt'));
+        
+        return view('professors', ['degree' => $degree]);
+    }
 }

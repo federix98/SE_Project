@@ -31,6 +31,7 @@ Route::get('cancel_lessons', function () {
 
 Route::get('calendar', 'FrontEnd\CalendarViewController@getCalendar');
 Route::get('calendar/now', 'FrontEnd\CalendarViewController@getRealTime');
+Route::get('calendar/professors', 'FrontEnd\CalendarViewController@getProfessors');
 
 Route::get('/', function() {
     return view('degree');
