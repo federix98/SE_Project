@@ -20,7 +20,7 @@ Route::prefix('v1')->group(function () {
     // --- Student APIs ---
 
     // Anonymous
-    Route::get('degrees/{degree}/calendar', 'DegreeController@getCalendar'); // DENTRO è IMPLEMENTATA ANCHE LA CHIAMATA /calendar?current_true PER LE LEZIONI REAL TIME
+    Route::get('degrees/{degree}/calendar', 'DegreeController@getCalendar'); // DENTRO è IMPLEMENTATA ANCHE LA CHIAMATA /calendar?current=true PER LE LEZIONI REAL TIME
     Route::get('degrees/{degree}/calendar/month', 'DegreeController@getMonthlyCalendar');
     //Route::get('degrees/{degree}/current', 'DegreeController@getCurrentLessons');
     Route::get('degrees/{degree}/professors', 'DegreeController@getProfessors');
