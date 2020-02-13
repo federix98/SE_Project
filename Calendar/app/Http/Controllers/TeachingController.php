@@ -150,16 +150,6 @@ class TeachingController extends Controller
         
         return response()->json(new TeachingResource($Teaching), 200);
     }
-    
-    /**
-     * Search Teaching
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
-    {
-        // al futuro me di 2 settimane : ricordati di aggiornare la documentazione riguardo item_id e item_name
-    }
 
     /**
      * Display a listing of professors by Teaching
